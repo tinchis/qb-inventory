@@ -35,7 +35,7 @@ const InventoryCore = {
         }
 
         const firstSlots = $(".player-inventory-first");
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 7; i++) {
             firstSlots.append(
                 '<div class="item-slot relative aspect-square w-full h-full bg-[#101010]/50 border border-[#242424] rounded-md  cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
@@ -46,7 +46,7 @@ const InventoryCore = {
         }
         $(".player-inventory").append(firstSlots);
 
-        for (let i = 6; i < data.slots - 1; i++) {
+        for (let i = 7; i < data.slots - 1; i++) {
             $(".player-inventory").append(
                 '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-img"></div>' +
@@ -88,7 +88,7 @@ const InventoryCore = {
                     InventoryState.totalWeight += (item.weight * item.amount);
                     const slotHtml = UIRenderer.renderItemSlot(item, item.slot);
 
-                    if (item.slot < 6) {
+                    if (item.slot < 7) {
                         $(".player-inventory").find("[data-slot=" + item.slot + "]").addClass("item-drag");
                         $(".player-inventory").find("[data-slot=" + item.slot + "]").html(slotHtml);
                         $(".player-inventory").find("[data-slot=" + item.slot + "]").data("item", item);
@@ -224,7 +224,7 @@ const InventoryCore = {
         }
 
         const firstSlots = $(".player-inventory-first");
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 7; i++) {
             firstSlots.append(
                 '<div class="item-slot" data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
@@ -261,7 +261,7 @@ const InventoryCore = {
                 InventoryState.totalWeight += (item.weight * item.amount);
                 const slotHtml = UIRenderer.renderItemSlot(item, item.slot);
 
-                if (item.slot < 6) {
+                if (item.slot < 7) {
                     $(".player-inventory").find("[data-slot=" + item.slot + "]").addClass("item-drag");
                     $(".player-inventory").find("[data-slot=" + item.slot + "]").html(slotHtml);
                     $(".player-inventory").find("[data-slot=" + item.slot + "]").data("item", item);
@@ -285,7 +285,7 @@ const InventoryCore = {
     toggleHotbar(data) {
         if (data.open) {
             $(".z-hotbar-inventory").html("");
-            for (let i = 1; i < 6; i++) {
+            for (let i = 1; i < 7; i++) {
                 const elem = '<div class="z-hotbar-item-slot" data-zhotbarslot="' + i + '"> <div class="z-hotbar-item-slot-key"><p>' + i + '</p></div><div class="z-hotbar-item-slot-img"></div><div class="z-hotbar-item-slot-label"><p>&nbsp;</p></div></div>';
                 $(".z-hotbar-inventory").append(elem);
             }
