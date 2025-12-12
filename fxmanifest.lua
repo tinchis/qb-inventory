@@ -40,10 +40,11 @@ files {
     'html/js/app.js',
     'html/images/*.png',
     'html/images/*.jpg',
-    'html/ammo_images/*.png',
     'html/attachment_images/*.png',
     'html/*.ttf',
-    'html/*.otf'
+    'html/*.otf',
+    'html/*.svg',
+    'html/*.ogg'
 }
 
 escrow_ignore {
