@@ -82,10 +82,12 @@ const InventoryCore = {
             }
         }
 
+        let totalItems = 0;
         if (data.inventory !== null) {
             $.each(data.inventory, function (i, item) {
                 if (item != null) {
                     InventoryState.totalWeight += (item.weight * item.amount);
+                    totalItems += item.amount;
                     const slotHtml = UIRenderer.renderItemSlot(item, item.slot);
 
                     if (item.slot < 7) {
@@ -133,6 +135,11 @@ const InventoryCore = {
 
         const percent = ((InventoryState.totalWeight / 1000).toFixed(2) / (data.maxweight / 1000).toFixed(2)) * 100;
         $("#enUsoPersonal").css("width", percent + "%");
+
+        const maxItems = data.slots || 30;
+        const itemPercent = (totalItems / maxItems) * 100;
+        $("#inventory-capacity-bar").css("width", itemPercent + "%");
+        $("#inventory-capacity-text").html(totalItems + "/" + maxItems);
 
         InventoryState.playerMaxWeight = data.maxweight;
 
@@ -299,7 +306,7 @@ const InventoryCore = {
                     $(".z-hotbar-inventory").find("[data-zhotbarslot=" + item.slot + "]").html(
                         '<div class="z-hotbar-item-slot-key"><p>' + item.slot + '</p></div>' +
                         '<div class="z-hotbar-item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div>' +
-                        '<div class="z-hotbar-item-slot-amount"><p>' + item.amount + ' (' + ((item.weight * item.amount) / 1000).toFixed(1) + ')</p></div>' +
+                        '<div class="z-hotbar-item-slot-amount"><p>' + item.amount + '</p></div>' +
                         ItemLabel
                     );
 

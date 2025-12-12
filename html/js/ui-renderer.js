@@ -10,9 +10,8 @@ const UIRenderer = {
 
     renderItemSlot(item, slot, isHotbar = false) {
         const ItemLabel = this.renderItemLabel(item);
-        const weightDisplay = ((item.weight * item.amount) / 1000).toFixed(1);
         const imgHtml = '<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div>';
-        const amountHtml = '<div class="item-slot-amount"><p>' + item.amount + ' (' + weightDisplay + ')</p></div>';
+        const amountHtml = '<div class="item-slot-amount"><p>' + item.amount + '</p></div>';
 
         if (slot < 6 && !isHotbar) {
             return '<div class="item-slot-key"><p>' + slot + '</p></div>' + imgHtml + amountHtml + ItemLabel;
@@ -24,7 +23,7 @@ const UIRenderer = {
     },
 
     renderItemSlotWithPrice(item) {
-        return '<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>(' + item.amount + ') $' + item.price + '</p></div><div class="item-slot-label"><p>' + item.label + '</p></div>';
+        return '<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-price"><p>$' + item.price + '</p></div><div class="item-slot-label"><p>' + item.label + '</p></div>';
     },
 
     updateQualityBar(item, $slot) {
