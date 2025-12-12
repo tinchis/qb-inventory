@@ -4,170 +4,194 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
-        const DEBUG_MODE = false;
+        const DEBUG_MODE = true;
     </script>
-    <!-- Custom CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(240 3.7% 15.9%)",
+                        input: "hsl(240 3.7% 15.9%)",
+                        ring: "hsl(142.1 76.2% 36.3%)",
+                        background: "hsl(240 10% 3.9%)",
+                        foreground: "hsl(0 0% 98%)",
+                        primary: {
+                            DEFAULT: "hsl(142.1 76.2% 36.3%)",
+                            foreground: "hsl(144.9 80.4% 10%)",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(240 3.7% 15.9%)",
+                            foreground: "hsl(0 0% 98%)",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(240 3.7% 15.9%)",
+                            foreground: "hsl(240 5% 64.9%)",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(240 3.7% 15.9%)",
+                            foreground: "hsl(0 0% 98%)",
+                        },
+                    },
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
-<body style="font-family: Verdana !important;">
+<body class="overflow-hidden select-none bg-transparent">
     <script>
         if (DEBUG_MODE) {
-            document.body.style.backgroundColor = '#1a1a1a';
-            document.getElementById('qb-inventory1').style.display = 'block';
+            document.body.style.backgroundColor = '#09090b';
+            document.getElementById('qb-inventory1').style.display = 'flex';
         } else {
             document.body.style.backgroundColor = 'rgba(0,0,0,0)';
         }
     </script>
-    <div id="qb-inventory1">
-        <div class="inventory-info">
-        </div>
-        <div class="inv-container">
-            <div class="player-inv-info">
-                <div class="combine-option-container">
-                    <div class="btn-combine CombineItem">
-                        <p><i class="fas fa-pencil-ruler"></i> Combine</p>
-                    </div>
-                </div>
-                <div class="inv-option-item" id="item-use">
-                    <p><i class="fa-solid fa-hand-sparkles"></i> USE</p>
-                </div>
 
-                <div class="zona-cantidad">
-                    <!--input type="number" id="item-amount" class="inv-option-item" min=0 value="0" oninput="validity.valid||(value='');"></input-->
-                    <input type="number" id="item-amount" class="inv-option-item" min=1 max="10000000"
-                        placeholder="Amount" pattern="[0-9]" onfocus="this.value=''" placeholder=""
-                        oninput="validity.valid||(value='');"></input>
-                    <div class="label-cant">AMOUNT</div>
-
-                </div>
-                <div class="inv-option-item" id="item-give">
-                    <div id="dialog">
-                        <div id="nearPlayers"></div>
-                    </div>
-                    <p><i class="fa-solid fa-hand-holding-hand"></i> GIVE</p>
-                </div>
-                <span id="player-inv-weight">WEIGHT</span>
-
-                <div class="player-inv-weight-box"></div>
-
-                <div class="box-ropamenu" onclick="ropamenuopen()">
-                    <div class="icon-font-1">
-                        <i class="fa-solid fa-shirt" style="font-size: 15px;"></i>
-                    </div>
-                </div>
-
-                <div class="box-vehiculomenu" onclick="carmenuopen()">
-                    <div class="icon-font-2">
-                        <i class="fa-solid fa-car-rear" style="font-size: 15px;"></i>
-                    </div>
-                </div>
-
-
-                <div id="usoEspacioPersonal">
-                    <div id="enUsoPersonal">
-
-                    </div>
-                </div>
-                <div class="ply-inv-container-first"></div>
-                <!--         <div class="cuadro">
-		            <img src="element_loader.svg" class="icono-cuadro" />
-		</div>   -->
-            </div>
-
-            <div class="ply-inv-container">
-
-                <div class="player-inventory" data-inventory="player">
-                </div>
-                <div class="player-inventory-first" data-inventory="player"></div>
-            </div>
-
-            <div class="inv-options">
-                <div class="inv-options-list">
-                </div>
-            </div>
-
-        </div>
-        <div class="ply-hotbar-inventory" data-inventory="hotbar">
-            <!-- auto generated -->
-        </div>
-
-
-
-
-
-        <div class="a" style="text-align: start; width:430px; margin-left:820px; margin-top:180px;">
-            <div class="other-inv-info">
-                <div id="other-inv-label"></div>
-                <span id="other-inv-weight"></span>
-            </div>
-            <div class="oth-inv-container">
-                <div class="other-inventory" data-inventory="other">
-
-                </div>
-            </div>
-        </div>
+    <div id="qb-inventory1" class="fixed inset-0 hidden items-center justify-center p-8">
         <div class="inv-background"></div>
+
+        <div class="flex gap-6 w-full max-w-7xl mx-auto">
+            <div class="flex-1 flex flex-col gap-4">
+                <div class="bg-secondary border border-border rounded-lg p-6 flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-foreground text-xl font-semibold">Inventario Personal</h2>
+                        <div class="flex items-center gap-4">
+                            <div class="flex gap-2">
+                                <button
+                                    class="box-ropamenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
+                                    onclick="ropamenuopen()">
+                                    <i class="fa-solid fa-shirt text-foreground text-sm"></i>
+                                </button>
+                                <button
+                                    class="box-vehiculomenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
+                                    onclick="carmenuopen()">
+                                    <i class="fa-solid fa-car-rear text-foreground text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="player-inventory-first" data-inventory="player"></div>
+
+                    <div class="grid grid-cols-6 gap-2 p-4 bg-background/50 rounded-md border border-border/50">
+                        <div class="player-inventory" data-inventory="player"></div>
+                    </div>
+
+                    <div class="flex items-center gap-3 pt-2 border-t border-border">
+                        <span id="player-inv-weight" class="text-muted-foreground text-sm font-medium">PESO:</span>
+                        <div class="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                            <div id="enUsoPersonal" class="h-full bg-primary transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <button
+                        class="btn-combine CombineItem flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm">
+                        <i class="fas fa-pencil-ruler mr-2"></i>Combinar
+                    </button>
+                    <button
+                        class="inv-option-item flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm"
+                        id="item-use">
+                        <i class="fa-solid fa-hand-sparkles mr-2"></i>Usar
+                    </button>
+                    <div class="flex-1 flex flex-col gap-1">
+                        <input type="number" id="item-amount"
+                            class="bg-muted border border-border text-foreground px-3 py-2.5 rounded-md outline-none focus:border-ring transition-colors text-sm"
+                            min="1" max="10000000" placeholder="Cantidad" pattern="[0-9]" onfocus="this.value=''"
+                            oninput="validity.valid||(value='');">
+                        <span class="text-muted-foreground text-xs">Cantidad</span>
+                    </div>
+                    <button
+                        class="inv-option-item flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm relative"
+                        id="item-give">
+                        <div id="dialog" class="absolute bottom-full left-0 mb-2 hidden">
+                            <div id="nearPlayers"
+                                class="bg-secondary border border-border rounded-md p-2 min-w-[200px] flex flex-col gap-1">
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-hand-holding-hand mr-2"></i>Dar
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col gap-4">
+                <div class="bg-secondary border border-border rounded-lg p-6 flex flex-col gap-4">
+                    <div class="other-inv-info flex items-center justify-between">
+                        <div id="other-inv-label" class="text-foreground text-xl font-semibold">Otro Inventario</div>
+                        <span id="other-inv-weight" class="text-muted-foreground text-sm"></span>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-6 gap-2 p-4 bg-background/50 rounded-md border border-border/50 max-h-[60vh] overflow-y-auto">
+                        <div class="other-inventory" data-inventory="other"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ply-hotbar-inventory fixed bottom-[5%] left-1/2 -translate-x-1/2 flex gap-2"
+            data-inventory="hotbar"></div>
+
+        <div class="inv-options">
+            <div class="inv-options-list"></div>
+        </div>
+        <div id="usoEspacioPersonal" class="hidden"></div>
+        <div class="ply-inv-container-first hidden"></div>
+        <div class="player-inv-weight-box hidden"></div>
+        <div class="inventory-info hidden"></div>
     </div>
 
-    <div class="ply-iteminfo-container">
-        <div class="ply-iteminfo">
+    <div class="ply-iteminfo-container fixed hidden pointer-events-none z-[1000]">
+        <div class="ply-iteminfo bg-secondary border border-border rounded-lg p-4 min-w-[250px]">
             <div class="iteminfo-content">
-                <div class="item-info-title"></div>
-                <div class="item-info-line"></div>
-                <div class="item-info-description"></div>
+                <div class="item-info-title text-foreground text-base font-semibold mb-2"></div>
+                <div class="item-info-line border-t border-border my-2"></div>
+                <div class="item-info-description text-muted-foreground text-sm leading-relaxed"></div>
             </div>
         </div>
     </div>
 
-    <div class="weapon-attachments-container">
-        <div class="weapon-attachments-background">
-            <div class="weapon-attachments-container-title-box"></div>
-            <div class="weapon-attachments-container-title">Pistol | <span style="font-size: 2vh;">9mm</span></div>
+    <div class="weapon-attachments-container fixed hidden top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200]">
+        <div class="weapon-attachments-background bg-secondary border border-border rounded-lg p-8 min-w-[600px]">
+            <div class="flex items-center justify-between mb-6">
+                <div class="weapon-attachments-container-title text-foreground text-2xl font-bold">
+                    Pistol | <span class="text-lg text-muted-foreground">9mm</span>
+                </div>
+                <img src="./attachment_images/weapon_pistol.png" class="weapon-attachments-container-image w-40 h-auto">
+            </div>
 
-            <div class="weapon-attachments-container-line1"></div>
-            <div class="weapon-attachments-container-line2"></div>
-            <div class="weapon-attachments-durability-text">Arrastra para Quitar</div>
-        </div>
-        <img src="./attachment_images/weapon_pistol.png" class="weapon-attachments-container-image">
-        <div class="weapon-attachments-container-image-box"></div>
+            <div class="border-t border-border my-4"></div>
 
-        <div class="weapon-attachments-title">
-            <span style="font-weight: bold; letter-spacing: .1vh;">Complementos</span>
-        </div>
+            <div class="weapon-attachments-title text-foreground text-lg font-semibold mb-4">
+                Complementos
+            </div>
 
-        <div class="weapon-attachments">
-        </div>
+            <div class="weapon-attachments grid grid-cols-4 gap-3 mb-6"></div>
 
-        <div class="weapon-attachments-remove"></div>
+            <div
+                class="weapon-attachments-remove min-h-[80px] border-2 border-dashed border-border/50 rounded-md flex items-center justify-center mb-4">
+                <span class="text-muted-foreground text-sm">Arrastra aquí para quitar</span>
+            </div>
 
-        <div class="weapon-attachments-back">
-            <p style="font-size: 0.7vw;"><i class="fa-solid fa-right-from-bracket"
-                    style="font-size: 1.0vw; color:#38DAAF;"></i> Return to Inventory</p>
+            <button
+                class="weapon-attachments-back w-full bg-accent hover:bg-primary text-foreground px-6 py-3 rounded-md transition-colors font-medium">
+                <i class="fa-solid fa-right-from-bracket text-primary mr-2"></i>Volver al Inventario
+            </button>
         </div>
     </div>
 
-    <div class="itemboxes-container">
-    </div>
-    <div class="itembox-container template"></div>
-    <div class="requiredItem-container">
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <div class="itemboxes-container fixed bottom-4 right-4 flex flex-col gap-2 z-50"></div>
+    <div class="itembox-container template hidden"></div>
+    <div class="requiredItem-container"></div>
+
     <script src="js/state.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
     <script src="js/ui-renderer.js" type="text/javascript"></script>
