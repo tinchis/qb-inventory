@@ -5,6 +5,14 @@
     font-family: 'IBM Plex Mono', monospace !important;
 }
 
+button:focus,
+input:focus,
+div:focus,
+a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 p {
     margin: 0 !important;
 }
@@ -92,6 +100,21 @@ input[type=number]::-webkit-outer-spin-button {
     transform: translate(-50%, -50%);
     color: #1F1F1F;
     font-size: 2.7rem;
+    font-weight: 600;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.z-hotbar-item-slot-key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1F1F1F;
+    font-size: 2rem;
     font-weight: 600;
     z-index: 5;
     pointer-events: none;

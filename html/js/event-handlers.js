@@ -134,6 +134,13 @@ const EventHandlers = {
     },
 
     setupKeyboardEvents() {
+        $(document).on('keydown', function (event) {
+            if (event.keyCode === 9) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
         $(document).on('keyup', function (event) {
             switch (event.keyCode) {
                 case 112:

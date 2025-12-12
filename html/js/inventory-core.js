@@ -70,7 +70,7 @@ const InventoryCore = {
         const firstSlots = $(".player-inventory-first");
         for (let i = 1; i < 7; i++) {
             firstSlots.append(
-                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 " data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
@@ -81,7 +81,7 @@ const InventoryCore = {
 
         for (let i = 7; i < data.slots - 1; i++) {
             $(".player-inventory").append(
-                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 " data-slot="' + i + '">' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                 '</div>'
@@ -95,7 +95,7 @@ const InventoryCore = {
 
             for (let i = 1; i < (data.other.slots + 1); i++) {
                 $(".other-inventory").append(
-                    '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                    '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 " data-slot="' + i + '">' +
                     '<div class="item-slot-img"></div>' +
                     '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                     '</div>'

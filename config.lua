@@ -6,7 +6,7 @@ Config.MaxInventoryWeight = 120000                           -- Max weight a pla
 Config.MaxInventorySlots = 25                                 -- Max inventory slots for a player
 
 Config.KeyBinds = {
-    Inventory = 'TAB',
+    Inventory = 'F2',
     HotBar = 'z'
 }
 

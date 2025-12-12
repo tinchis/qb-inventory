@@ -75,7 +75,7 @@
         <div class="flex flex-row-reverse gap-6 ml-auto mr-auto items-center h-full">
             <div class="w-[500px] flex flex-col gap-4 transition-all duration-200"
                 style="animation: fadeIn 0.4s ease-out;">
-                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
+                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
                     style="background-image: url('svgs/grid-pattern.svg');  background-position: center;">
                     <div class="bannerGuide w-full px-3 py-2 rounded-[10px] border border-[#29776f]"
                         style="background-image: url('svgs/grid-pattern.svg'); background-size: cover; background-position: center; background-color: #0C5952">
@@ -107,8 +107,8 @@
 
                     <div class="flex items-center justify-between w-full">
                         <div
-                            class="flex items-center min-w-[140px] w-fit h-9 rounded-md border border-input bg-transparent shadow-sm px-2 focus-within:ring-1 focus-within:ring-[#0F7168] transition-all">
-                            <button id="decrease-amount"
+                            class="flex items-center min-w-[140px] w-fit h-9 rounded-md border border-input bg-transparent  px-2 focus-within:ring-1 focus-within:ring-[#0F7168] transition-all">
+                            <button id="decrease-amount" tabindex="-1"
                                 class="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity px-1">
                                 <div class="flex items-center h-[10px] w-[10px]">
                                     <svg width="10" height="1" viewBox="0 0 10 1" fill="none"
@@ -118,10 +118,10 @@
                                     </svg>
                                 </div>
                             </button>
-                            <input type="number" placeholder="0" id="item-amount" min="1" max="10000000"
+                            <input type="number" placeholder="0" id="item-amount" min="1" max="10000000" tabindex="-1"
                                 class="w-[90px] h-full bg-transparent px-2 py-1 text-sm text-center text-foreground outline-none placeholder:text-muted-foreground"
                                 oninput="validity.valid||(value='');">
-                            <button id="increase-amount"
+                            <button id="increase-amount" tabindex="-1"
                                 class="flex items-center justify-center cursor-pointer hover:opacity-70 transition-opacity px-1">
                                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +200,7 @@
 
             <div class="other-inv-container-wrapper w-[580px] flex flex-col gap-4 hidden transition-all duration-100"
                 style="animation: fadeInDelayed 0.6s ease-out;">
-                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
+                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90  backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
                     style="background-image: url('svgs/grid-pattern.svg'); background-position: center;">
 
                     <div class="oth-inv-container">
@@ -265,7 +265,7 @@
             </div>
 
 
-            <button
+            <button tabindex="-1"
                 class="weapon-attachments-back w-full bg-accent hover:bg-primary text-foreground px-6 py-3 rounded-md transition-colors font-medium">
                 <i class="fa-solid fa-right-from-bracket text-primary mr-2"></i>Volver al Inventario
             </button>
