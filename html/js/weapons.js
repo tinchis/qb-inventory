@@ -24,14 +24,18 @@ const WeaponManager = {
                 width: Durability + "%",
             });
 
-            $(".weapon-attachments-container-image").attr("src", "./attachment_images/" + weaponData.WeaponData.name + ".png");
+            const weaponImgSrc = "./attachment_images/" + weaponData.WeaponData.name + ".png";
+            $(".weapon-attachments-container-image").attr("src", weaponImgSrc).on('error', function () {
+                $(this).css({ 'opacity': '0.3', 'filter': 'grayscale(1)' });
+            });
             $(".weapon-attachments").html("");
 
             if (weaponData.AttachmentData !== null && weaponData.AttachmentData !== undefined) {
                 if (weaponData.AttachmentData.length > 0) {
                     $(".weapon-attachments-title").html('<span style="font-weight: bold; letter-spacing: .1vh;">Attachments</span>');
                     $.each(weaponData.AttachmentData, function (i, attachment) {
-                        $(".weapon-attachments").append('<div class="item-slot weapon-attachment" id="weapon-attachment-' + i + '"> <div class="item-slot-label"><p>' + attachment.label + '</p></div> <div class="item-slot-img"><img src="./images/' + attachment.attachment + '.png"></div> </div>');
+                        const attachImgSrc = './images/' + attachment.attachment + '.png';
+                        $(".weapon-attachments").append('<div class="item-slot weapon-attachment" id="weapon-attachment-' + i + '"> <div class="item-slot-label"><p>' + attachment.label + '</p></div> <div class="item-slot-img"><img class="loading" src="' + attachImgSrc + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');"></div> </div>');
                         attachment.id = i;
                         $("#weapon-attachment-" + i).data("AttachmentData", attachment);
                     });
