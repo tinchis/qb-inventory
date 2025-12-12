@@ -52,7 +52,7 @@ const InventoryCore = {
         }
 
         if (data.other != null && data.other != "") {
-            $(".oth-inv-container, .other-inv-info").show();
+            $(".other-inv-container-wrapper").show();
             $("#item-use").hide();
             $(".ply-iteminfo-container").removeClass("inv-normal");
 
@@ -65,7 +65,7 @@ const InventoryCore = {
                 );
             }
         } else {
-            $(".oth-inv-container, .other-inv-info").hide();
+            $(".other-inv-container-wrapper").hide();
             $("#item-use").show();
 
             for (let i = 1; i < (this.dropslots + 1); i++) {

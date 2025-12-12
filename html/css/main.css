@@ -78,6 +78,8 @@ input[type=number]::-webkit-outer-spin-button {
 .item-slot {
     position: relative;
     aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
     background: hsl(240 3.7% 15.9%);
     border: 1px solid hsl(240 3.7% 20%);
     border-radius: 0.375rem;
@@ -88,6 +90,7 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 80px;
 }
 
 .item-slot:hover {
@@ -286,4 +289,12 @@ input[type=number]::-webkit-outer-spin-button {
 .ui-draggable-dragging {
     z-index: 9999 !important;
     transform: scale(1.1);
+}
+
+.other-inv-container-wrapper {
+    transition: all 0.3s ease;
+}
+
+.oth-inv-container {
+    width: 100%;
 }

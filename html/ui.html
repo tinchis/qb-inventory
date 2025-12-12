@@ -47,7 +47,10 @@
 <body class="overflow-hidden select-none bg-transparent">
     <script>
         if (DEBUG_MODE) {
-            document.body.style.backgroundColor = '#09090b';
+            document.body.style.backgroundImage = 'url(images/bgTest.png)';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundRepeat = 'no-repeat';
             document.getElementById('qb-inventory1').style.display = 'flex';
         } else {
             document.body.style.backgroundColor = 'rgba(0,0,0,0)';
@@ -57,30 +60,29 @@
     <div id="qb-inventory1" class="fixed inset-0 hidden items-center justify-center p-8">
         <div class="inv-background"></div>
 
-        <div class="flex gap-6 w-full max-w-7xl mx-auto">
-            <div class="flex-1 flex flex-col gap-4">
-                <div class="bg-secondary border border-border rounded-lg p-6 flex flex-col gap-4">
-                    <div class="flex items-center justify-between">
+        <div class="flex gap-6 w-full max-w-[1300px] mx-auto">
+            <div class="w-[580px] flex flex-col gap-4">
+                <div class="bg-secondary/95 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
+                    <div class="flex items-center justify-between mb-2">
                         <h2 class="text-foreground text-xl font-semibold">Inventario Personal</h2>
-                        <div class="flex items-center gap-4">
-                            <div class="flex gap-2">
-                                <button
-                                    class="box-ropamenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
-                                    onclick="ropamenuopen()">
-                                    <i class="fa-solid fa-shirt text-foreground text-sm"></i>
-                                </button>
-                                <button
-                                    class="box-vehiculomenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
-                                    onclick="carmenuopen()">
-                                    <i class="fa-solid fa-car-rear text-foreground text-sm"></i>
-                                </button>
-                            </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="box-ropamenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
+                                onclick="ropamenuopen()">
+                                <i class="fa-solid fa-shirt text-foreground text-sm"></i>
+                            </button>
+                            <button
+                                class="box-vehiculomenu w-10 h-10 bg-accent hover:bg-primary rounded-md flex items-center justify-center transition-colors"
+                                onclick="carmenuopen()">
+                                <i class="fa-solid fa-car-rear text-foreground text-sm"></i>
+                            </button>
                         </div>
                     </div>
 
                     <div class="player-inventory-first" data-inventory="player"></div>
 
-                    <div class="grid grid-cols-6 gap-2 p-4 bg-background/50 rounded-md border border-border/50">
+                    <div
+                        class="grid grid-cols-5 grid-rows-5 gap-2 p-4 bg-background/50 rounded-md border border-border/50">
                         <div class="player-inventory" data-inventory="player"></div>
                     </div>
 
@@ -92,46 +94,47 @@
                     </div>
                 </div>
 
-                <div class="flex gap-2">
+                <div class="grid grid-cols-4 gap-2">
                     <button
-                        class="btn-combine CombineItem flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm">
-                        <i class="fas fa-pencil-ruler mr-2"></i>Combinar
+                        class="btn-combine CombineItem bg-accent hover:bg-primary text-foreground px-3 py-2.5 rounded-md transition-colors font-medium text-sm">
+                        <i class="fas fa-pencil-ruler mr-1"></i>Combinar
                     </button>
                     <button
-                        class="inv-option-item flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm"
+                        class="inv-option-item bg-accent hover:bg-primary text-foreground px-3 py-2.5 rounded-md transition-colors font-medium text-sm"
                         id="item-use">
-                        <i class="fa-solid fa-hand-sparkles mr-2"></i>Usar
+                        <i class="fa-solid fa-hand-sparkles mr-1"></i>Usar
                     </button>
-                    <div class="flex-1 flex flex-col gap-1">
+                    <div class="flex flex-col gap-1">
                         <input type="number" id="item-amount"
-                            class="bg-muted border border-border text-foreground px-3 py-2.5 rounded-md outline-none focus:border-ring transition-colors text-sm"
+                            class="bg-muted border border-border text-foreground px-2 py-2 rounded-md outline-none focus:border-ring transition-colors text-sm"
                             min="1" max="10000000" placeholder="Cantidad" pattern="[0-9]" onfocus="this.value=''"
                             oninput="validity.valid||(value='');">
-                        <span class="text-muted-foreground text-xs">Cantidad</span>
                     </div>
                     <button
-                        class="inv-option-item flex-1 bg-accent hover:bg-primary text-foreground px-4 py-2.5 rounded-md transition-colors font-medium text-sm relative"
+                        class="inv-option-item bg-accent hover:bg-primary text-foreground px-3 py-2.5 rounded-md transition-colors font-medium text-sm relative"
                         id="item-give">
                         <div id="dialog" class="absolute bottom-full left-0 mb-2 hidden">
                             <div id="nearPlayers"
                                 class="bg-secondary border border-border rounded-md p-2 min-w-[200px] flex flex-col gap-1">
                             </div>
                         </div>
-                        <i class="fa-solid fa-hand-holding-hand mr-2"></i>Dar
+                        <i class="fa-solid fa-hand-holding-hand mr-1"></i>Dar
                     </button>
                 </div>
             </div>
 
-            <div class="flex-1 flex flex-col gap-4">
-                <div class="bg-secondary border border-border rounded-lg p-6 flex flex-col gap-4">
-                    <div class="other-inv-info flex items-center justify-between">
+            <div class="other-inv-container-wrapper w-[650px] flex flex-col gap-4 hidden">
+                <div class="bg-secondary/95 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
+                    <div class="other-inv-info flex items-center justify-between mb-2">
                         <div id="other-inv-label" class="text-foreground text-xl font-semibold">Otro Inventario</div>
                         <span id="other-inv-weight" class="text-muted-foreground text-sm"></span>
                     </div>
 
-                    <div
-                        class="grid grid-cols-6 gap-2 p-4 bg-background/50 rounded-md border border-border/50 max-h-[60vh] overflow-y-auto">
-                        <div class="other-inventory" data-inventory="other"></div>
+                    <div class="oth-inv-container">
+                        <div
+                            class="grid grid-cols-6 grid-rows-5 gap-2 p-4 bg-background/50 rounded-md border border-border/50">
+                            <div class="other-inventory" data-inventory="other"></div>
+                        </div>
                     </div>
                 </div>
             </div>
