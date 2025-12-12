@@ -29,13 +29,22 @@ ui_page {
 files {
     'html/ui.html',
     'html/css/main.css',
+    'html/js/state.js',
+    'html/js/utils.js',
+    'html/js/ui-renderer.js',
+    'html/js/items.js',
+    'html/js/weapons.js',
+    'html/js/drag-drop.js',
+    'html/js/event-handlers.js',
+    'html/js/inventory-core.js',
     'html/js/app.js',
     'html/images/*.png',
     'html/images/*.jpg',
-    'html/ammo_images/*.png',
     'html/attachment_images/*.png',
     'html/*.ttf',
-    'html/*.otf'
+    'html/*.otf',
+    'html/*.svg',
+    'html/*.ogg'
 }
 
 escrow_ignore {
@@ -51,4 +60,3 @@ escrow_ignore {
 }
 
 dependency 'qb-weapons'
-server_scripts { '@mysql-async/lib/MySQL.lua' }server_scripts { '@mysql-async/lib/MySQL.lua' }
