@@ -37,7 +37,7 @@ const InventoryCore = {
         const firstSlots = $(".player-inventory-first");
         for (let i = 1; i < 6; i++) {
             firstSlots.append(
-                '<div class="item-slot" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[#101010]/50 border border-[#242424] rounded-md  cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
@@ -48,7 +48,7 @@ const InventoryCore = {
 
         for (let i = 6; i < data.slots - 1; i++) {
             $(".player-inventory").append(
-                '<div class="item-slot" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                 '</div>'
@@ -62,7 +62,7 @@ const InventoryCore = {
 
             for (let i = 1; i < (data.other.slots + 1); i++) {
                 $(".other-inventory").append(
-                    '<div class="item-slot" data-slot="' + i + '">' +
+                    '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                     '<div class="item-slot-img"></div>' +
                     '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                     '</div>'
@@ -74,15 +74,12 @@ const InventoryCore = {
 
             for (let i = 1; i < (this.dropslots + 1); i++) {
                 $(".other-inventory").append(
-                    '<div class="item-slot" data-slot="' + i + '">' +
+                    '<div class="item-slot relative aspect-square w-full h-full bg-black border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                     '<div class="item-slot-img"></div>' +
                     '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                     '</div>'
                 );
             }
-            $(".other-inventory .item-slot").css({
-                "background-color": "rgba(0, 0, 0)"
-            });
         }
 
         if (data.inventory !== null) {

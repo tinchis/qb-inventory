@@ -1,22 +1,8 @@
 @import "tailwindcss";
 
-@font-face {
-    font-family: 'Verdana';
-    src: url('../Esentika-Regular.otf');
-}
-
-@font-face {
-    font-family: 'Verdana Bold';
-    src: url('../NBAHeatSouthBeach.otf');
-}
-
-@font-face {
-    font-family: bankgothic;
-    src: url('../Esentika-Regular.otf');
-}
-
 * {
     user-select: none !important;
+    font-family: 'IBM Plex Mono', monospace !important;
 }
 
 p {
@@ -67,29 +53,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: contents;
 }
 
-.item-slot {
-    position: relative;
-    aspect-ratio: 1;
-    width: 100%;
-    height: 100%;
-    background: hsl(240 3.7% 15.9%);
-    border: 1px solid hsl(240 3.7% 20%);
-    border-radius: 0.375rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-}
-
-.item-slot:hover {
-    border-color: hsl(142.1 76.2% 36.3%);
-    background: hsl(240 3.7% 18%);
-    transform: translateY(-2px);
-}
 
 .item-slot-key {
     position: absolute;
@@ -170,12 +133,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;
 }
 
-.ply-hotbar-inventory .item-slot {
-    width: 3.5rem;
-    height: 3.5rem;
-    background: hsl(240 3.7% 15.9% / 0.9);
-    backdrop-filter: blur(8px);
-}
 
 .player-inventory-first {
     display: contents;
