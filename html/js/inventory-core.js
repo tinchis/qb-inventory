@@ -22,6 +22,10 @@ const InventoryCore = {
             InventoryState.requiredItemOpen = false;
         }
 
+        if (typeof DEBUG_MODE === 'undefined' || !DEBUG_MODE) {
+            $("#game-view").show();
+        }
+
         $("#qb-inventory1").removeClass("slide-right").fadeIn(300);
 
         if (data.other != null && data.other != "") {
@@ -176,6 +180,10 @@ const InventoryCore = {
         $(".item-slot").css("border", "1px solid rgba(255, 255, 255, 0.1)");
         $(".ply-hotbar-inventory").css("display", "block");
         $(".ply-iteminfo-container").css("display", "none");
+
+        if (typeof DEBUG_MODE === 'undefined' || !DEBUG_MODE) {
+            $("#game-view").hide();
+        }
 
         $("#qb-inventory1").addClass("slide-right");
         $("#qb-inventory1").addClass("slide-right").fadeOut(300, function () {
