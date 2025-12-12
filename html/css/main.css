@@ -36,17 +36,6 @@ input[type=number]::-webkit-outer-spin-button {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-#qb-inventory1:not(.loaded):not(.debug-mode) {
-    opacity: 0;
-    visibility: hidden;
-}
-
-#qb-inventory1.loaded,
-#qb-inventory1.debug-mode {
-    opacity: 1;
-    visibility: visible;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -110,19 +99,6 @@ input[type=number]::-webkit-outer-spin-button {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
-.item-slot-img img.loading {
-    opacity: 0;
-    animation: fadeInImage 0.3s ease-in-out forwards;
-}
-
-@keyframes fadeInImage {
-    to {
-        opacity: 1;
-    }
 }
 
 .item-slot-amount {

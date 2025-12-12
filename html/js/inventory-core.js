@@ -3,36 +3,8 @@ const InventoryCore = {
     dropslots: 30,
     droplabel: "Otro inventario",
     dropmaxweight: 100000,
-    isPreloaded: false,
 
-    async preloadCriticalImages(data) {
-        const imagesToPreload = [];
-
-        if (data.inventory !== null) {
-            $.each(data.inventory, function (i, item) {
-                if (item != null && item.image) {
-                    imagesToPreload.push('images/' + item.image);
-                }
-            });
-        }
-
-        if (data.other && data.other.inventory !== null) {
-            $.each(data.other.inventory, function (i, item) {
-                if (item != null && item.image) {
-                    imagesToPreload.push('images/' + item.image);
-                }
-            });
-        }
-
-        const uniqueImages = [...new Set(imagesToPreload)];
-        const preloadPromises = uniqueImages.slice(0, 20).map(src => UIRenderer.preloadImage(src));
-
-        await Promise.allSettled(preloadPromises);
-    },
-
-    async open(data) {
-        const isDebugMode = typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE;
-
+    open(data) {
         InventoryState.slots = data.slots;
         EventHandlers.buttonsMenuEvents();
         EventHandlers.buttonsMenuEventsarriba();
@@ -50,16 +22,11 @@ const InventoryCore = {
             InventoryState.requiredItemOpen = false;
         }
 
-        if (!isDebugMode) {
+        if (typeof DEBUG_MODE === 'undefined' || !DEBUG_MODE) {
             $("#game-view").show();
         }
 
-        if (!this.isPreloaded && !isDebugMode) {
-            await this.preloadCriticalImages(data);
-            this.isPreloaded = true;
-        }
-
-        $("#qb-inventory1").removeClass("slide-right");
+        $("#qb-inventory1").removeClass("slide-right").fadeIn(300);
 
         if (data.other != null && data.other != "") {
             $(".other-inventory").attr("data-inventory", data.other.name);
@@ -223,14 +190,6 @@ const InventoryCore = {
         }
 
         DragDropManager.handleDragDrop();
-
-        if (isDebugMode) {
-            $("#qb-inventory1").addClass("loaded debug-mode").fadeIn(300);
-        } else {
-            setTimeout(() => {
-                $("#qb-inventory1").addClass("loaded").fadeIn(300);
-            }, 50);
-        }
     },
 
     close() {
@@ -242,8 +201,8 @@ const InventoryCore = {
             $("#game-view").hide();
         }
 
-        $("#qb-inventory1").removeClass("loaded").addClass("slide-right");
-        $("#qb-inventory1").fadeOut(300, function () {
+        $("#qb-inventory1").addClass("slide-right");
+        $("#qb-inventory1").addClass("slide-right").fadeOut(300, function () {
             $(".item-slot").remove();
             $(".item-money").remove();
         });
@@ -356,10 +315,9 @@ const InventoryCore = {
                     if (item.slot == 41) {
                         return;
                     }
-                    const imgPath = 'images/' + item.image;
                     $(".z-hotbar-inventory").find("[data-zhotbarslot=" + item.slot + "]").html(
                         '<div class="z-hotbar-item-slot-key"><p>' + item.slot + '</p></div>' +
-                        '<div class="z-hotbar-item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + item.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div>' +
+                        '<div class="z-hotbar-item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div>' +
                         '<div class="z-hotbar-item-slot-amount"><p>' + item.amount + '</p></div>' +
                         ItemLabel
                     );
@@ -382,8 +340,7 @@ const InventoryCore = {
         $(".itembox-container").fadeIn(250);
         $("#itembox-action").html("<p>Used</p>");
         $("#itembox-label").html("<p>" + data.item.label + "</p>");
-        const imgPath = 'images/' + data.item.image;
-        $("#itembox-image").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + data.item.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div>');
+        $("#itembox-image").html('<div class="item-slot-img"><img src="images/' + data.item.image + '" alt="' + data.item.name + '" /></div>');
         setTimeout(function () {
             $(".itembox-container").fadeOut(250);
         }, 2000);
@@ -397,13 +354,12 @@ const InventoryCore = {
             type = "Removed";
         }
 
-        const imgPath = 'images/' + data.item.image;
         const $itembox = $(".itembox-container.template").clone();
         $itembox.removeClass('template');
         $itembox.html(
             '<div id="itembox-action"><p>' + type + '</p></div>' +
             '<div id="itembox-label"><p>' + data.item.label + '</p></div>' +
-            '<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + data.item.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div>'
+            '<div class="item-slot-img"><img src="images/' + data.item.image + '" alt="' + data.item.name + '" /></div>'
         );
 
         $(".itemboxes-container").prepend($itembox);
@@ -421,8 +377,7 @@ const InventoryCore = {
             if (!InventoryState.requiredItemOpen) {
                 $(".requiredItem-container").html("");
                 $.each(data.items, function (index, item) {
-                    const imgPath = 'images/' + item.image;
-                    const element = '<div class="requiredItem-box"><div id="requiredItem-action">Requerido</div><div id="requiredItem-label"><p>' + item.label + '</p></div><div id="requiredItem-image"><div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + item.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div></div></div>';
+                    const element = '<div class="requiredItem-box"><div id="requiredItem-action">Requerido</div><div id="requiredItem-label"><p>' + item.label + '</p></div><div id="requiredItem-image"><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div></div></div>';
                     $(".requiredItem-container").hide();
                     $(".requiredItem-container").append(element);
                     $(".requiredItem-container").fadeIn(100);

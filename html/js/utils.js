@@ -72,11 +72,10 @@ const InventoryUtils = {
         if (($fromInv.attr("data-inventory").split("-")[0] == "itemshop" && $toInv.attr("data-inventory").split("-")[0] == "itemshop") ||
             ($fromInv.attr("data-inventory") == "crafting" && $toInv.attr("data-inventory") == "crafting")) {
             const itemData = $fromInv.find("[data-slot=" + $fromSlot + "]").data("item");
-            const imgPath = 'images/' + itemData.image;
             if ($fromInv.attr("data-inventory").split("-")[0] == "itemshop") {
-                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             } else {
-                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             }
             this.inventoryError($fromInv, $fromSlot);
             return false;
@@ -84,11 +83,10 @@ const InventoryUtils = {
 
         if ($toAmount == 0 && ($fromInv.attr("data-inventory").split("-")[0] == "itemshop" || $fromInv.attr("data-inventory") == "crafting")) {
             const itemData = $fromInv.find("[data-slot=" + $fromSlot + "]").data("item");
-            const imgPath = 'images/' + itemData.image;
             if ($fromInv.attr("data-inventory").split("-")[0] == "itemshop") {
-                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             } else {
-                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $fromInv.find("[data-slot=" + $fromSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             }
             this.inventoryError($fromInv, $fromSlot);
             return false;
@@ -96,11 +94,10 @@ const InventoryUtils = {
 
         if ($toInv.attr("data-inventory").split("-")[0] == "itemshop" || $toInv.attr("data-inventory") == "crafting") {
             const itemData = $toInv.find("[data-slot=" + $toSlot + "]").data("item");
-            const imgPath = 'images/' + itemData.image;
             if ($toInv.attr("data-inventory").split("-")[0] == "itemshop") {
-                $toInv.find("[data-slot=" + $toSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $toInv.find("[data-slot=" + $toSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>(' + itemData.amount + ') $' + itemData.price + '</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             } else {
-                $toInv.find("[data-slot=" + $toSlot + "]").html('<div class="item-slot-img"><img class="loading" src="' + imgPath + '" alt="' + itemData.name + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
+                $toInv.find("[data-slot=" + $toSlot + "]").html('<div class="item-slot-img"><img src="images/' + itemData.image + '" alt="' + itemData.name + '" /></div><div class="item-slot-amount"><p>' + itemData.amount + ' (' + ((itemData.weight * itemData.amount) / 1000).toFixed(1) + ')</p></div><div class="item-slot-label"><p>' + itemData.label + '</p></div>');
             }
             this.inventoryError($fromInv, $fromSlot);
             return false;

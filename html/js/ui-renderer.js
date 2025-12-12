@@ -1,30 +1,4 @@
 const UIRenderer = {
-    imageCache: new Set(),
-
-    preloadImage(src) {
-        return new Promise((resolve) => {
-            if (this.imageCache.has(src)) {
-                resolve(true);
-                return;
-            }
-
-            const img = new Image();
-            img.onload = () => {
-                this.imageCache.add(src);
-                resolve(true);
-            };
-            img.onerror = () => {
-                resolve(false);
-            };
-            img.src = src;
-        });
-    },
-
-    getImageHtml(imageSrc, itemName) {
-        const fullPath = 'images/' + imageSrc;
-        return '<div class="item-slot-img"><img class="loading" src="' + fullPath + '" alt="' + itemName + '" onerror="this.onerror=null; this.style.opacity=\'0.3\'; this.style.filter=\'grayscale(1)\';" onload="this.classList.remove(\'loading\');" /></div>';
-    },
-
     renderItemLabel(item) {
         if ((item.name).split("_")[0] == "weapon") {
             if (!InventoryUtils.isWeaponBlocked(item.name)) {
@@ -36,7 +10,7 @@ const UIRenderer = {
 
     renderItemSlot(item, slot, isHotbar = false) {
         const ItemLabel = this.renderItemLabel(item);
-        const imgHtml = this.getImageHtml(item.image, item.name);
+        const imgHtml = '<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div>';
         const amountHtml = '<div class="item-slot-amount"><p>' + item.amount + '</p></div>';
 
         if (slot < 6 && !isHotbar) {
@@ -49,8 +23,7 @@ const UIRenderer = {
     },
 
     renderItemSlotWithPrice(item) {
-        const imgHtml = this.getImageHtml(item.image, item.name);
-        return imgHtml + '<div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-price"><p>$' + item.price + '</p></div><div class="item-slot-label"><p>' + item.label + '</p></div>';
+        return '<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-price"><p>$' + item.price + '</p></div><div class="item-slot-label"><p>' + item.label + '</p></div>';
     },
 
     updateQualityBar(item, $slot) {
@@ -113,11 +86,11 @@ const UIRenderer = {
                 <div class="weapon-desc-info">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
-                            <img src="https://i.ibb.co/TRLHN6h/Vr0Nd4Z.png" style="width:2vh;" onerror="this.style.display='none';">
+                            <img src="https://i.ibb.co/TRLHN6h/Vr0Nd4Z.png" style="width:2vh;">
                             <div class="weapon-number">${itemData.info.serie}</div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <img src="https://i.ibb.co/7k3W1jk/jI57Qhp.png" style="width:1.8vh;margin-right:.5vh" onerror="this.style.display='none';">
+                            <img src="https://i.ibb.co/7k3W1jk/jI57Qhp.png" style="width:1.8vh;margin-right:.5vh">
                             <span class="bullets">${ammo}</span>
                         </div>
                     </div>
@@ -129,11 +102,11 @@ const UIRenderer = {
                 <div class="weapon-desc-info">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
-                            <img src="https://i.ibb.co/TRLHN6h/Vr0Nd4Z.png" style="width:2vh;" onerror="this.style.display='none';">
+                            <img src="https://i.ibb.co/TRLHN6h/Vr0Nd4Z.png" style="width:2vh;">
                             <div class="weapon-number">${itemData.info.serie}</div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <img src="https://i.ibb.co/7k3W1jk/jI57Qhp.png" style="width:1.8vh;margin-right:.5vh" onerror="this.style.display='none';">
+                            <img src="https://i.ibb.co/7k3W1jk/jI57Qhp.png" style="width:1.8vh;margin-right:.5vh">
                             <span class="bullets">${ammo}</span>
                         </div>
                     </div>

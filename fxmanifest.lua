@@ -28,8 +28,6 @@ ui_page {
 
 files {
     'html/ui.html',
-    'html/svgs/*.svg',
-    'html/images/*.png',
     'html/css/main.css',
     'html/js/state.js',
     'html/js/utils.js',
