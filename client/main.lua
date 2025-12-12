@@ -752,6 +752,10 @@ end, false)
 
 RegisterKeyMapping('inventory', Lang:t('inf_mapping.opn_inv'), 'keyboard', Config.KeyBinds.Inventory)
 
+RegisterCommand('menu', function()
+    ExecuteCommand('inventory')
+end, false)
+
 RegisterCommand('hotbar', function()
     isHotbar = not isHotbar
     if not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() then
