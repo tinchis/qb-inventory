@@ -6,7 +6,15 @@ const DragDropManager = {
         };
 
         $(".item-drag").draggable({
-            helper: 'clone',
+            helper: function () {
+                const clone = $(this).clone();
+                clone.css({
+                    'width': '80px',
+                    'height': '80px',
+                    'min-height': '80px'
+                });
+                return clone;
+            },
             appendTo: "body",
             scroll: false,
             revertDuration: 500,
@@ -51,7 +59,15 @@ const DragDropManager = {
         });
 
         $(".item-drag-money").draggable({
-            helper: 'clone',
+            helper: function () {
+                const clone = $(this).clone();
+                clone.css({
+                    'width': '80px',
+                    'height': '80px',
+                    'min-height': '80px'
+                });
+                return clone;
+            },
             appendTo: "body",
             scroll: false,
             revertDuration: 500,
