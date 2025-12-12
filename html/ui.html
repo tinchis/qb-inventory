@@ -196,17 +196,18 @@
             </div>
 
 
-            <div class="other-inv-container-wrapper w-[580px] flex flex-col gap-4 hidden transition-all duration-100"
+            <div class="other-inv-container-wrapper w-[500px] flex flex-col gap-4 hidden transition-all duration-200"
                 style="animation: fadeInDelayed 0.6s ease-out;">
-                <div class="bg-secondary/95 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
-                    <div class="other-inv-info flex items-center justify-between mb-2">
-                        <div id="other-inv-label" class="text-foreground text-xl font-semibold">Otro Inventario</div>
-                        <span id="other-inv-weight" class="text-muted-foreground text-sm"></span>
+                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
+                    style="background-image: url('svgs/grid-pattern.svg'); background-position: center;">
+                    <div class="other-inv-info flex items-center justify-between">
+                        <div id="other-inv-label" class="text-white font-semibold text-base">Otro Inventario</div>
+                        <span id="other-inv-weight" class="text-[#A1A1A1] text-xs"></span>
                     </div>
 
 
                     <div class="oth-inv-container">
-                        <div class="grid grid-cols-6 grid-rows-5 gap-2 p-4">
+                        <div class="grid grid-cols-6 grid-rows-5 gap-2">
                             <div class="other-inventory" data-inventory="other"></div>
                         </div>
                     </div>
