@@ -37,7 +37,7 @@ const InventoryCore = {
         const firstSlots = $(".player-inventory-first");
         for (let i = 1; i < 7; i++) {
             firstSlots.append(
-                '<div class="item-slot relative aspect-square w-full h-full bg-[#101010]/50 border border-[#242424] rounded-md  cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[#101010] border border-[#242424] rounded-md  cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +

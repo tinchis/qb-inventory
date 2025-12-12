@@ -70,7 +70,7 @@
         </object>
         <div class="flex flex-row-reverse gap-6 ml-auto mr-auto items-center h-full">
             <div class="w-[500px] flex flex-col gap-4 transition-all duration-300">
-                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/95 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-border rounded-[10px] px-3 py-6 flex flex-col gap-3"
+                <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-border rounded-[10px] px-3 py-6 flex flex-col gap-3"
                     style="background-image: url('svgs/grid-pattern.svg');  background-position: center;">
                     <div class="bannerGuide w-full px-3 py-2 rounded-[10px] border border-[#29776f]"
                         style="background-image: url('svgs/grid-pattern.svg'); background-size: cover; background-position: center; background-color: #0C5952">
@@ -89,10 +89,10 @@
                             </svg>
                             <div class="flex flex-col gap-1">
                                 <p class="text-white uppercase text-xs">
-                                    Fix Inventario.
+                                    Para dar items a otro usuario
                                 </p>
                                 <p class="text-[#90C9C4] text-xs">
-                                    Para dar un item, pulsa la ruedita del ratón sobre el objeto.
+                                    pulsa la ruedita del ratón ssobre el objeto.
                                 </p>
                             </div>
                         </div>
@@ -104,12 +104,17 @@
                     <div class="grid grid-cols-6 grid-rows-5 gap-2">
                         <div class="player-inventory" data-inventory="player"></div>
                     </div>
-
-                    <div class="flex items-center gap-3 pt-2 border-t border-border">
-                        <span id="player-inv-weight" class="text-muted-foreground text-sm font-medium">PESO:</span>
-                        <div class="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                            <div id="enUsoPersonal" class="h-full bg-primary transition-all duration-300"></div>
-                        </div>
+                    <div class="flex items-center gap-2 bg-[#0D0D0D] px-3 py-2.5 rounded-lg border border-[#2D2D2D]/70">
+                        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M13.3709 14C14.2706 14 15 13.2494 15 12.3236C15 12.0717 14.9449 11.8235 14.8392 11.5972L14.7908 11.5019L8.99554 0.900243C8.69156 0.344213 8.11995 0 7.5 0C6.91877 0 6.38002 0.302565 6.06445 0.798574L6.0045 0.900243L0.209163 11.5019C0.0720419 11.7527 1.39535e-05 12.0358 0 12.3236C0 13.2494 0.729391 14 1.62904 14H13.3709ZM7.5 8.79487C7.11467 8.79487 6.80233 8.47345 6.80233 8.07692V4.84615C6.80233 4.44964 7.11467 4.12821 7.5 4.12821C7.88533 4.12821 8.19768 4.44964 8.19768 4.84615V8.07692C8.19768 8.47345 7.88533 8.79487 7.5 8.79487ZM7.5 11.3147C7.11467 11.3147 6.80233 10.9933 6.80233 10.5968V10.5897C6.80233 10.1932 7.11467 9.8718 7.5 9.8718C7.88533 9.8718 8.19768 10.1932 8.19768 10.5897V10.5968C8.19768 10.9933 7.88533 11.3147 7.5 11.3147Z"
+                                fill="#0F7067" />
+                        </svg>
+                        <p class="flex items-center gap-1.5 text-[#8C8C8C] text-xs">
+                            presiona <span
+                                class="text-xs bg-[#1F1F1F] border border-[#2F2F2F] rounded-md px-1.5 py-0.5">clic
+                                derecho</span> para <span class="text-[#0F7067]">dropear un item</span>
+                        </p>
                     </div>
                 </div>
 
