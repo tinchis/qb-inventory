@@ -177,9 +177,7 @@
 
                     <div class="player-inventory-first" data-inventory="player"></div>
 
-                    <div class="grid grid-cols-6 grid-rows-5 gap-2">
-                        <div class="player-inventory" data-inventory="player"></div>
-                    </div>
+                    <div class="grid grid-cols-6 grid-rows-5 gap-2 player-inventory" data-inventory="player"></div>
                     <div class="flex items-center gap-2 bg-[#0D0D0D] px-3 py-2.5 rounded-lg border border-[#2D2D2D]/70">
                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -201,16 +199,12 @@
                 <div class="h-fit min-h-[200px] max-h-[800px] bg-[#090909]/90 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-sm border border-[#5e5e5e7c] rounded-[10px] px-3 py-6 flex flex-col gap-3"
                     style="background-image: url('svgs/grid-pattern.svg'); background-position: center;">
                     <div class="other-inv-info flex items-center justify-between">
-                        <div id="other-inv-label" class="text-white font-semibold text-base">Otro Inventario</div>
+                        <div id="other-inv-label" class="text-white font-semibold text-[#626262]">Otro Inventario</div>
                         <span id="other-inv-weight" class="text-[#A1A1A1] text-xs"></span>
                     </div>
 
 
-                    <div class="oth-inv-container">
-                        <div class="grid grid-cols-6 grid-rows-5 gap-2">
-                            <div class="other-inventory" data-inventory="other"></div>
-                        </div>
-                    </div>
+                    <div class="grid grid-cols-6 grid-rows-5 gap-2 other-inventory" data-inventory="other"></div>
                 </div>
             </div>
         </div>

@@ -138,6 +138,7 @@ const EventHandlers = {
             switch (event.keyCode) {
                 case 112:
                 case 27:
+                case 9:
                     InventoryCore.close();
                     InventoryState.controlPressed = false;
                     break;

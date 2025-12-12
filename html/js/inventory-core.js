@@ -74,7 +74,7 @@ const InventoryCore = {
 
             for (let i = 1; i < (this.dropslots + 1); i++) {
                 $(".other-inventory").append(
-                    '<div class="item-slot relative aspect-square w-full h-full bg-black border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
+                    '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                     '<div class="item-slot-img"></div>' +
                     '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                     '</div>'
