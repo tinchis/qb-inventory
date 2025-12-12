@@ -37,7 +37,7 @@ const InventoryCore = {
         const firstSlots = $(".player-inventory-first");
         for (let i = 1; i < 7; i++) {
             firstSlots.append(
-                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[#101010] border border-[#242424] rounded-md  cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-key"><p>' + i + '</p></div>' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
@@ -48,7 +48,7 @@ const InventoryCore = {
 
         for (let i = 7; i < data.slots - 1; i++) {
             $(".player-inventory").append(
-                '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                 '<div class="item-slot-img"></div>' +
                 '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                 '</div>'
@@ -62,7 +62,7 @@ const InventoryCore = {
 
             for (let i = 1; i < (data.other.slots + 1); i++) {
                 $(".other-inventory").append(
-                    '<div class="item-slot relative aspect-square w-full h-full bg-[#0A0A0A] border border-[#1a1a1a] rounded-lg cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#0C5952]/10 hover:shadow-[0_0_10px_rgba(12,89,82,0.3)]" data-slot="' + i + '">' +
+                    '<div class="item-slot relative aspect-square w-full h-full bg-[hsl(240_3.7%_15.9%)] border border-[hsl(240_3.7%_20%)] rounded-md cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[80px] hover:border-[#0C5952] hover:bg-[#161616] hover:-translate-y-0.5" data-slot="' + i + '">' +
                     '<div class="item-slot-img"></div>' +
                     '<div class="item-slot-label"><p>&nbsp;</p></div>' +
                     '</div>'
@@ -115,12 +115,10 @@ const InventoryCore = {
             });
         }
 
-        let totalItemsOther = 0;
         if ((data.other != null && data.other != "") && data.other.inventory != null) {
             $.each(data.other.inventory, function (i, item) {
                 if (item != null) {
                     InventoryState.totalWeightOther += (item.weight * item.amount);
-                    totalItemsOther += item.amount;
                     $(".other-inventory").find("[data-slot=" + item.slot + "]").addClass("item-drag");
 
                     if (item.price != null) {
@@ -151,25 +149,15 @@ const InventoryCore = {
                 $("#other-inv-label").html(data.other.label);
             } else {
                 $("#other-inv-label").html(data.other.label);
-                $("#other-inv-weight").html("Peso: " + (InventoryState.totalWeightOther / 1000).toFixed(2) + "kg / " + (data.other.maxweight / 1000).toFixed(2) + "kg");
+                $("#other-inv-weight").html("Weight: " + (InventoryState.totalWeightOther / 1000).toFixed(2) + " / " + (data.other.maxweight / 1000).toFixed(2));
             }
             InventoryState.otherMaxWeight = data.other.maxweight;
             InventoryState.otherLabel = data.other.label;
-
-            const maxItemsOther = data.other.slots || 30;
-            const itemPercentOther = (totalItemsOther / maxItemsOther) * 100;
-            $("#other-inventory-capacity-bar").css("width", itemPercentOther + "%");
-            $("#other-inventory-capacity-text").html(totalItemsOther + "/" + maxItemsOther);
         } else {
             $("#other-inv-label").html(this.droplabel);
-            $("#other-inv-weight").html("Peso: " + (InventoryState.totalWeightOther / 1000).toFixed(2) + "kg / " + (this.dropmaxweight / 1000).toFixed(2) + "kg");
+            $("#other-inv-weight").html("Weight: " + (InventoryState.totalWeightOther / 1000).toFixed(2) + " / " + (this.dropmaxweight / 1000).toFixed(2));
             InventoryState.otherMaxWeight = this.dropmaxweight;
             InventoryState.otherLabel = this.droplabel;
-
-            const maxItemsOther = this.dropslots || 30;
-            const itemPercentOther = (totalItemsOther / maxItemsOther) * 100;
-            $("#other-inventory-capacity-bar").css("width", itemPercentOther + "%");
-            $("#other-inventory-capacity-text").html(totalItemsOther + "/" + maxItemsOther);
         }
 
         $.each(data.maxammo, function (index, ammotype) {
