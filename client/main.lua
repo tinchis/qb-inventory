@@ -752,13 +752,7 @@ end, false)
 
 RegisterKeyMapping('inventory', Lang:t('inf_mapping.opn_inv'), 'keyboard', Config.KeyBinds.Inventory)
 
-RegisterCommand('inventorytab', function()
-    ExecuteCommand('inventory')
-end, false)
-
-RegisterKeyMapping('inventorytab', 'Abrir/Cerrar Inventario (TAB)', 'keyboard', 'TAB')
-
-RegisterCommand('inventario', function()
+RegisterCommand('menu', function()
     ExecuteCommand('inventory')
 end, false)
 
