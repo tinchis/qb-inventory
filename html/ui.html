@@ -57,12 +57,11 @@
         }
     </script>
 
-    <div id="qb-inventory1" class="fixed inset-0 hidden items-center justify-center p-8">
-        <div class="inv-background"></div>
-
-        <div class="flex gap-6 w-full max-w-[1300px] mx-auto">
-            <div class="w-[580px] flex flex-col gap-4">
-                <div class="bg-secondary/95 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
+    <div id="qb-inventory1" class="fixed inset-0 hidden justify-center items-center p-3">
+        <div class="flex flex-row-reverse gap-6 ml-auto mr-auto h-full">
+            <div class="w-[500px] flex flex-col gap-4 transition-all duration-300">
+                <div
+                    class="h-full bg-[#090909]/70 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
                     <div class="flex items-center justify-between mb-2">
                         <h2 class="text-foreground text-xl font-semibold">Inventario Personal</h2>
                         <div class="flex gap-2">
@@ -123,7 +122,7 @@
                 </div>
             </div>
 
-            <div class="other-inv-container-wrapper w-[650px] flex flex-col gap-4 hidden">
+            <div class="other-inv-container-wrapper w-[580px] flex flex-col gap-4 hidden transition-all duration-300">
                 <div class="bg-secondary/95 backdrop-blur-sm border border-border rounded-lg p-6 flex flex-col gap-4">
                     <div class="other-inv-info flex items-center justify-between mb-2">
                         <div id="other-inv-label" class="text-foreground text-xl font-semibold">Otro Inventario</div>
