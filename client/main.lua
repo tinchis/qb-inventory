@@ -756,6 +756,14 @@ RegisterCommand('menu', function()
     ExecuteCommand('inventory')
 end, false)
 
+RegisterCommand('ropa', function()
+    TriggerEvent("am_clothingmenu:openmenu")
+end, false)
+
+RegisterCommand('carro', function()
+    TriggerEvent("am_vehcontrol:openExternal")
+end, false)
+
 RegisterCommand('hotbar', function()
     isHotbar = not isHotbar
     if not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() then
