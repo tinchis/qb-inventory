@@ -3,60 +3,40 @@ game 'gta5'
 lua54 'yes'
 description 'QB-Inventory'
 version '1.2.4'
-
 shared_scripts {
     '@qb-core/shared/locale.lua',
     'locales/en.lua',
     'locales/*.lua',
     'config.lua',
+    'emotes/Shared.lua'
 }
-
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
-	'server/visual.lua',
+    'emotes/SMain.lua'
+}
+client_scripts { 
+    'client/main.lua',
+    'client/menus.lua',
+    'emotes/CMain.lua',
+    'clothing/Functions.lua', 		-- Global Functions / Events / Debug and Locale start.
+	'clothing/Locale/*.lua', 				-- Locales.
+	'clothing/Config.lua',			-- Configuration.
+	'clothing/Variations.lua',		-- Variants, this is where you wanan change stuff around most likely.
+	'clothing/Clothing.lua'
 }
 
-client_scripts {
-	'client/main.lua',
-	'client/visual.lua',
-}
-
-ui_page {
-    'html/ui.html'
-}
+ui_page 'html/ui-svelte.html'
 
 files {
     'html/ui.html',
-    'html/css/main.css',
-    'html/js/state.js',
-    'html/js/utils.js',
-    'html/js/ui-renderer.js',
-    'html/js/items.js',
-    'html/js/weapons.js',
-    'html/js/drag-drop.js',
-    'html/js/event-handlers.js',
-    'html/js/inventory-core.js',
-    'html/js/app.js',
+    'html/css/**',
+    'html/js/**',
     'html/images/*.png',
     'html/images/*.jpg',
+    'html/ammo_images/*.png',
     'html/attachment_images/*.png',
     'html/*.ttf',
-    'html/*.otf',
-    'html/*.svg',
-    'html/*.ogg'
+    'emotes/anims.json'
 }
-
-escrow_ignore {
-    '@qb-core/shared/locale.lua',
-    'locales/en.lua',
-    'locales/*.lua',
-    'config.lua',
-	'client/main.lua',
-	'client/visual.lua',
-    '@oxmysql/lib/MySQL.lua',
-    'server/main.lua',
-	'server/visual.lua',
-}
-
 dependency 'qb-weapons'

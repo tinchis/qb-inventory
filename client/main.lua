@@ -4,7 +4,6 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = QBCore.Functions.GetPlayerData()
 local inInventory = false
 local currentWeapon = nil
-
 local currentOtherInventory = nil
 local Drops = {}
 local CurrentDrop = nil
@@ -31,7 +30,7 @@ local function HasItem(items, amount)
     local kvIndex = 2
     if isTable and not isArray then
         totalItems = 0
-        for _ in pairs(items) do totalItems = totalItems + 1 end
+        for _ in pairs(items) do totalItems += 1 end
         kvIndex = 1
     end
     for _, itemData in pairs(PlayerData.items) do
@@ -39,7 +38,7 @@ local function HasItem(items, amount)
             for k, v in pairs(items) do
                 local itemKV = { k, v }
                 if itemData and itemData.name == itemKV[kvIndex] and ((amount and itemData.amount >= amount) or (not isArray and itemData.amount >= v) or (not amount and isArray)) then
-                    count = count + 1
+                    count += 1
                 end
             end
             if count == totalItems then
@@ -116,23 +115,20 @@ end
 ---Returns a formatted attachments table from item data
 ---@param itemdata table Data of an item
 ---@return table attachments
-
-
-
 local function FormatWeaponAttachments(itemdata)
     if not itemdata.info or not itemdata.info.attachments or #itemdata.info.attachments == 0 then
         return {}
     end
     local attachments = {}
-    local weaponName = itemdata.name
-    local WeaponAttachments = exports['qb-weapons']:getConfigWeaponAttachments()
+    local weaponName = itemdata.name:upper()
+    local WeaponAttachments = exports['qb-weapons']:getConfigWeaponAttachments(weaponName)
     if not WeaponAttachments then return {} end
     for attachmentType, weapons in pairs(WeaponAttachments) do
-        local componentHash = weapons[weaponName]
+        local componentHash = weapons.component
         if componentHash then
             for _, attachmentData in pairs(itemdata.info.attachments) do
                 if attachmentData.component == componentHash then
-                    local label = QBCore.Shared.Items[attachmentType] and QBCore.Shared.Items[attachmentType].label or 'Unknown'
+                    local label = QBCore.Shared.Items[attachmentData.item] and QBCore.Shared.Items[attachmentData.item].label or 'Unknown'
                     attachments[#attachments + 1] = {
                         attachment = attachmentType,
                         label = label
@@ -143,9 +139,6 @@ local function FormatWeaponAttachments(itemdata)
     end
     return attachments
 end
-
-
-
 
 ---Checks if the vehicle's engine is at the back or not
 ---@param vehModel integer The model hash of the vehicle
@@ -183,9 +176,7 @@ local function GetTrunkSize(vehicleClass)
     return trunkSize[vehicleClass].maxweight, trunkSize[vehicleClass].slots
 end
 exports('GetTrunkSize', GetTrunkSize)
-RegisterNetEvent('weapons:client:SetCurrentWeapon', function(data, bool)
-    CurrentWeaponData = data or {}
-end)
+
 ---Closes the inventory NUI
 local function closeInventory()
     SendNUIMessage({
@@ -210,12 +201,6 @@ local function ToggleHotbar(toggle)
         open = toggle,
         items = HotbarItems
     })
-end
-
----Plays the opening animation of the inventory
-local function openAnim()
-    LoadAnimDict('pickup_object')
-    TaskPlayAnim(PlayerPedId(), 'pickup_object', 'putdown_low', 5.0, 1.5, 1.0, 48, 0.0, 0, 0, 0)
 end
 
 local function ItemsToItemInfo()
@@ -314,6 +299,8 @@ local function GetAttachmentThresholdItems()
     return items
 end
 
+---Removes drops in the area of the client
+---@param index integer The drop id to remove
 local function RemoveNearbyDrop(index)
     if not DropsNear[index] then return end
 
@@ -337,27 +324,30 @@ local function RemoveAllNearbyDrops()
     end
 end
 
+---Creates a new item drop object on the ground
+---@param index integer The drop id to save the object in
 local function CreateItemDrop(index)
     local dropItem = CreateObject(Config.ItemDropObject, DropsNear[index].coords.x, DropsNear[index].coords.y, DropsNear[index].coords.z, false, false, false)
     DropsNear[index].object = dropItem
     DropsNear[index].isDropShowing = true
     PlaceObjectOnGroundProperly(dropItem)
     FreezeEntityPosition(dropItem, true)
-	if Config.UseTarget then
-		exports['qb-target']:AddTargetEntity(dropItem, {
-			options = {
-				{
-					icon = 'fa-solid fa-bag-shopping',
-					label = "Open Bag",
-					action = function()
-						TriggerServerEvent("inventory:server:OpenInventory", "drop", index)
-					end,
-				}
-			},
-			distance = 2.5,
-		})
-	end
+    if Config.UseTarget then
+        exports['qb-target']:AddTargetEntity(dropItem, {
+            options = {
+                {
+                    icon = 'fas fa-backpack',
+                    label = Lang:t('menu.o_bag'),
+                    action = function()
+                        TriggerServerEvent('inventory:server:OpenInventory', 'drop', index)
+                    end,
+                }
+            },
+            distance = 2.5,
+        })
+    end
 end
+
 --#endregion Functions
 
 --#region Events
@@ -414,11 +404,12 @@ RegisterNetEvent('inventory:client:CheckOpenState', function(type, id, label)
     end
 end)
 
-RegisterNetEvent('inventory:client:ItemBox', function(itemData, type)
+RegisterNetEvent('inventory:client:ItemBox', function(itemData, type, amount)
     SendNUIMessage({
-        action = 'itemBox',
+        action = "itemBox",
         item = itemData,
-        type = type
+        type = type,
+        amount = amount or 1
     })
 end)
 
@@ -452,19 +443,30 @@ RegisterNetEvent('inventory:client:OpenInventory', function(PlayerAmmo, inventor
     if not IsEntityDead(PlayerPedId()) then
         ToggleHotbar(false)
         SetNuiFocus(true, true)
+        SetNuiFocusKeepInput(true)
         if other then
             currentOtherInventory = other.name
         end
-        SendNUIMessage({
-            action = 'open',
-            inventory = inventory,
-            slots = Config.MaxInventorySlots,
-            other = other,
-            maxweight = Config.MaxInventoryWeight,
-            Ammo = PlayerAmmo,
-            maxammo = Config.MaximumAmmoValues,
-        })
-        inInventory = true
+        QBCore.Functions.TriggerCallback('inventory:server:ConvertQuality', function(data)
+            inventory = data.inventory
+            other = data.other
+            SendNUIMessage({
+                action = "open",
+                inventory = inventory,
+                slots = Config.MaxInventorySlots,
+                other = other,
+                maxweight = Config.MaxInventoryWeight,
+                Ammo = PlayerAmmo,
+                maxammo = Config.MaximumAmmoValues,
+            })
+            inInventory = true
+            CreateThread(function()
+                while inInventory do
+                    DisableDisplayControlActions()
+                    Wait(1)
+                end
+            end)
+        end,inventory,other)
     end
 end)
 
@@ -638,13 +640,10 @@ end)
 RegisterNetEvent('inventory:client:DropItemAnim', function()
     local ped = PlayerPedId()
     SendNUIMessage({
-        action = "close",
+        action = 'close',
     })
-    RequestAnimDict("pickup_object")
-    while not HasAnimDictLoaded("pickup_object") do
-        Wait(7)
-    end
-    TaskPlayAnim(ped, "pickup_object" ,"pickup_low" ,8.0, -8.0, -1, 1, 0, false, false, false )
+    LoadAnimDict('pickup_object')
+    TaskPlayAnim(ped, 'pickup_object', 'pickup_low', 8.0, -8.0, -1, 1, 0, false, false, false)
     Wait(2000)
     ClearPedTasks(ped)
 end)
@@ -677,7 +676,12 @@ RegisterCommand('closeinv', function()
     closeInventory()
 end, false)
 
-RegisterCommand('inventory', function()
+RegisterCommand('JulirooOpenInventory', function()
+    local IsInPaintball = exports['biyei_arenas']:inGameStatus()
+    if IsInPaintball then
+        QBCore.Functions.Notify("No se pudo completar esta acción", 'error')
+        return
+    end
     if IsNuiFocused() then return end
     if not isCrafting and not inInventory then
         if not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() then
@@ -706,7 +710,7 @@ RegisterCommand('inventory', function()
                             curVeh = vehicle
                             CurrentGlovebox = nil
                         else
-                            QBCore.Functions.Notify(Lang:t('notify.vlocked'), 'error')
+                            QBCore.Functions.Notify("Acción bloqueada", 'error')
                             return
                         end
                     else
@@ -736,46 +740,27 @@ RegisterCommand('inventory', function()
                 TriggerServerEvent('inventory:server:OpenInventory', 'glovebox', CurrentGlovebox)
             elseif CurrentDrop ~= 0 then
                 TriggerServerEvent('inventory:server:OpenInventory', 'drop', CurrentDrop)
-            elseif VendingMachine then
-                local ShopItems = {}
-                ShopItems.label = 'Vending Machine'
-                ShopItems.items = Config.VendingItem
-                ShopItems.slots = #Config.VendingItem
-                TriggerServerEvent('inventory:server:OpenInventory', 'shop', 'Vendingshop_' .. math.random(1, 99), ShopItems)
             else
-                openAnim()
                 TriggerServerEvent('inventory:server:OpenInventory')
             end
         end
     end
 end, false)
 
-RegisterKeyMapping('inventory', Lang:t('inf_mapping.opn_inv'), 'keyboard', Config.KeyBinds.Inventory)
+RegisterKeyMapping('JulirooOpenInventory', Lang:t('inf_mapping.opn_inv'), 'keyboard', 'F2')
 
-RegisterCommand('menu', function()
-    ExecuteCommand('inventory')
-end, false)
-
-RegisterCommand('ropa', function()
-    TriggerEvent("am_clothingmenu:openmenu")
-end, false)
-
-RegisterCommand('carro', function()
-    TriggerEvent("am_vehcontrol:openExternal")
-end, false)
-
-RegisterCommand('hotbar', function()
+RegisterCommand('Juliroohotbar', function()
     isHotbar = not isHotbar
     if not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() then
         ToggleHotbar(isHotbar)
     end
 end, false)
 
-RegisterKeyMapping('hotbar', Lang:t('inf_mapping.tog_slots'), 'keyboard', Config.KeyBinds.HotBar)
+RegisterKeyMapping('Juliroohotbar', Lang:t('inf_mapping.tog_slots'), 'keyboard', 'TAB')
 
 for i = 1, 6 do
-    RegisterCommand('slot' .. i, function()
-        if not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() and not LocalPlayer.state.inv_busy then
+    RegisterCommand('Julirooslot' .. i, function()
+        if not inInventory and not PlayerData.metadata['isdead'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['ishandcuffed'] and not IsPauseMenuActive() and not LocalPlayer.state.inv_busy then
             if i == 6 then
                 i = Config.MaxInventorySlots
             end
@@ -783,7 +768,7 @@ for i = 1, 6 do
             closeInventory()
         end
     end, false)
-    RegisterKeyMapping('slot' .. i, Lang:t('inf_mapping.use_item') .. i, 'keyboard', i)
+    RegisterKeyMapping('Julirooslot' .. i, Lang:t('inf_mapping.use_item') .. i, 'keyboard', i)
 end
 
 --#endregion Commands
@@ -799,6 +784,7 @@ RegisterNUICallback('Notify', function(data, cb)
     QBCore.Functions.Notify(data.message, data.type)
     cb('ok')
 end)
+
 RegisterNUICallback('GetWeaponData', function(cData, cb)
     local data = {
         WeaponData = QBCore.Shared.Items[cData.weapon],
@@ -808,10 +794,13 @@ RegisterNUICallback('GetWeaponData', function(cData, cb)
 end)
 
 RegisterNUICallback('RemoveAttachment', function(data, cb)
+    closeInventory()
     local ped = PlayerPedId()
     local WeaponData = data.WeaponData
-    local allAttachments = exports['qb-weapons']:getConfigWeaponAttachments()
-    local Attachment = allAttachments[data.AttachmentData.attachment][WeaponData.name]
+    currentWeapon = WeaponData.name
+    TriggerEvent("inventory:client:UseWeapon", WeaponData, false)
+    local allAttachments = exports['qb-weapons']:getConfigWeaponAttachments(WeaponData.name:upper())
+    local Attachment = allAttachments[data.AttachmentData.attachment]
 
     QBCore.Functions.TriggerCallback('weapons:server:RemoveAttachment', function(NewAttachments)
         if NewAttachments ~= false then
@@ -820,9 +809,9 @@ RegisterNUICallback('RemoveAttachment', function(data, cb)
 
             for _, v in pairs(NewAttachments) do
                 for attachmentType, weapons in pairs(allAttachments) do
-                    local componentHash = weapons[WeaponData.name]
+                    local componentHash = weapons.component
                     if componentHash and v.component == componentHash then
-                        local label = QBCore.Shared.Items[attachmentType] and QBCore.Shared.Items[attachmentType].label or 'Unknown'
+                        local label = QBCore.Shared.Items[weapons.item] and QBCore.Shared.Items[weapons.item].label or 'Unknown'
                         Attachies[#Attachies + 1] = {
                             attachment = attachmentType,
                             label = label,
@@ -853,6 +842,7 @@ RegisterNUICallback('CloseInventory', function(_, cb)
         CurrentGlovebox = nil
         CurrentStash = nil
         SetNuiFocus(false, false)
+        SetNuiFocusKeepInput(false)
         inInventory = false
         ClearPedTasks(PlayerPedId())
         return
@@ -865,6 +855,7 @@ RegisterNUICallback('CloseInventory', function(_, cb)
         TriggerServerEvent('inventory:server:SaveInventory', 'glovebox', CurrentGlovebox)
         CurrentGlovebox = nil
     elseif CurrentStash ~= nil then
+        TriggerServerEvent('inventory:server:SetIsOpenState', false, 'stash', CurrentStash)
         TriggerServerEvent('inventory:server:SaveInventory', 'stash', CurrentStash)
         CurrentStash = nil
     else
@@ -872,6 +863,7 @@ RegisterNUICallback('CloseInventory', function(_, cb)
         CurrentDrop = nil
     end
     SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
     inInventory = false
     cb('ok')
 end)
@@ -944,23 +936,18 @@ RegisterNUICallback('GiveItem', function(data, cb)
     cb('ok')
 end)
 
-
 --#endregion NUI
 
 --#region Threads
--- Threads
 
-
--- Threads
 CreateThread(function()
     while true do
         local sleep = 100
         if DropsNear ~= nil then
-			local ped = PlayerPedId()
-			local closestDrop = nil
-			local closestDistance = nil
+            local ped = PlayerPedId()
+            local closestDrop = nil
+            local closestDistance = nil
             for k, v in pairs(DropsNear) do
-
                 if DropsNear[k] ~= nil then
                     if Config.UseItemDrop then
                         if not v.isDropShowing then
@@ -968,28 +955,24 @@ CreateThread(function()
                         end
                     else
                         sleep = 0
-						
-                        if Config.UseMarker then
-                            local r, g, b = table.unpack(Config.MarkerColor)
-                            DrawMarker(20, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.15, r, g, b, 155, false, false, false, 1, false, false, false)
-                        end
+                        DrawMarker(20, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.15, 120, 10, 20, 155, false, false, false, 1, false, false, false)
                     end
 
-					local coords = (v.object ~= nil and GetEntityCoords(v.object)) or vector3(v.coords.x, v.coords.y, v.coords.z)
-					local distance = #(GetEntityCoords(ped) - coords)
-					if distance < 2 and (not closestDistance or distance < closestDistance) then
-						closestDrop = k
-						closestDistance = distance
-					end
+                    local coords = (v.object ~= nil and GetEntityCoords(v.object)) or vector3(v.coords.x, v.coords.y, v.coords.z)
+                    local distance = #(GetEntityCoords(ped) - coords)
+                    if distance < 2 and (not closestDistance or distance < closestDistance) then
+                        closestDrop = k
+                        closestDistance = distance
+                    end
                 end
             end
 
 
-			if not closestDrop then
-				CurrentDrop = 0
-			else
-				CurrentDrop = closestDrop
-			end
+            if not closestDrop then
+                CurrentDrop = 0
+            else
+                CurrentDrop = closestDrop
+            end
         end
         Wait(sleep)
     end
@@ -1019,130 +1002,190 @@ CreateThread(function()
         Wait(500)
     end
 end)
-CreateThread(function()
-    if Config.UseTarget then
-        exports['qb-target']:AddTargetModel(Config.VendingObjects, {
-            options = {
-                {
-                    icon = 'fa-solid fa-cash-register',
-                    label = Lang:t('menu.vending'),
-                    action = function()
-                        OpenVending()
-                    end
-                },
-            },
-            distance = 2.5
-        })
-    end
+
+-- CreateThread(function()
+--     if Config.UseTarget then
+--         exports['qb-target']:AddTargetModel(Config.VendingObjects, {
+--             options = {
+--                 {
+--                     icon = 'fa-solid fa-cash-register',
+--                     label = Lang:t('menu.vending'),
+--                     action = function()
+--                         OpenVending()
+--                     end
+--                 },
+--             },
+--             distance = 2.5
+--         })
+--     end
+-- end)
+
+-- CreateThread(function()
+--     if Config.UseTarget then
+--         exports['qb-target']:AddTargetModel(Config.CraftingObject, {
+--             options = {
+--                 {
+--                     event = 'inventory:client:craftTarget',
+--                     icon = 'fas fa-tools',
+--                     label = Lang:t('menu.craft'),
+--                 },
+--             },
+--             distance = 2.5,
+--         })
+--     else
+--         while true do
+--             local sleep = 1000
+--             if LocalPlayer.state['isLoggedIn'] then
+--                 local pos = GetEntityCoords(PlayerPedId())
+--                 local craftObject = GetClosestObjectOfType(pos, 2.0, Config.CraftingObject, false, false, false)
+--                 if craftObject ~= 0 then
+--                     local objectPos = GetEntityCoords(craftObject)
+--                     if #(pos - objectPos) < 1.5 then
+--                         sleep = 0
+--                         DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, Lang:t('interaction.craft'))
+--                         if IsControlJustReleased(0, 38) then
+--                             local crafting = {}
+--                             crafting.label = Lang:t('label.craft')
+--                             crafting.items = GetThresholdItems()
+--                             TriggerServerEvent('inventory:server:OpenInventory', 'crafting', math.random(1, 99), crafting)
+--                             sleep = 100
+--                         end
+--                     end
+--                 end
+--             end
+--             Wait(sleep)
+--         end
+--     end
+-- end)
+
+-- CreateThread(function()
+--     while true do
+--         local sleep = 1000
+--         if LocalPlayer.state['isLoggedIn'] then
+--             local pos = GetEntityCoords(PlayerPedId())
+--             local distance = #(pos - Config.AttachmentCraftingLocation)
+--             if distance < 10 then
+--                 if distance < 1.5 then
+--                     sleep = 0
+--                     DrawText3Ds(Config.AttachmentCraftingLocation.x, Config.AttachmentCraftingLocation.y, Config.AttachmentCraftingLocation.z, Lang:t('interaction.craft'))
+--                     if IsControlJustPressed(0, 38) then
+--                         local crafting = {}
+--                         crafting.label = Lang:t('label.a_craft')
+--                         crafting.items = GetAttachmentThresholdItems()
+--                         TriggerServerEvent('inventory:server:OpenInventory', 'attachment_crafting', math.random(1, 99), crafting)
+--                         sleep = 100
+--                     end
+--                 end
+--             end
+--         end
+--         Wait(sleep)
+--     end
+-- end)
+
+--#endregion Threads
+
+function DisableDisplayControlActions()
+    -- DisableAllControlActions(0)
+    -- DisableAllControlActions(1)
+    -- DisableAllControlActions(2)
+    
+                DisableControlAction(0, 1, true) -- Movimiento Ratón
+                DisableControlAction(0, 2, true) -- Movimiento Ratón
+                DisableControlAction(0, 3, true) -- Movimiento Ratón
+                DisableControlAction(0, 4, true) -- Movimiento Ratón
+                DisableControlAction(0, 5, true) -- Movimiento Ratón
+                DisableControlAction(0, 6, true) -- Movimiento Ratón
+                DisableControlAction(0, 288, true) -- F1
+                DisableControlAction(0, 289, true) -- F2
+                DisableControlAction(0, 170, true) -- F3
+                DisableControlAction(0, 318, true) -- F5
+                DisableControlAction(0, 167, true) -- F6
+                DisableControlAction(0, 168, true) -- F7
+                DisableControlAction(0, 56, true) -- F9
+                DisableControlAction(0, 57, true) -- F10
+                DisableControlAction(0, 344, true) -- F11
+                DisableControlAction(0, 263, true) -- R
+                DisableControlAction(0, 140, true) -- R
+                DisableControlAction(0, 264, true) -- Q
+                DisableControlAction(0, 199, true) -- P
+                DisableControlAction(0, 177, true) -- ESC
+                DisableControlAction(0, 200, true) -- ESC
+                DisableControlAction(0, 202, true) -- ESC
+                DisableControlAction(0, 322, true) -- ESC
+                DisableControlAction(0, 245, true) -- T
+                DisableControlAction(0, 37, true) -- TAB
+                DisableControlAction(0, 261, true) -- Rueda Ratón
+                DisableControlAction(0, 262, true) -- Rueda Ratón
+                DisableControlAction(0, 157, true) -- 1
+                DisableControlAction(0, 158, true) -- 2
+                DisableControlAction(0, 160, true) -- 3
+                DisableControlAction(0, 164, true) -- 4
+                DisableControlAction(0, 165, true) -- 5
+                DisableControlAction(0, 25, true) -- Click Derecho
+                DisableControlAction(0, 68, true) -- Click Derecho
+                DisableControlAction(0, 70, true) -- Click Derecho
+                DisableControlAction(0, 91, true) -- Click Derecho
+                DisableControlAction(0, 225, true) -- Click Derecho
+                DisableControlAction(0, 114, true) -- Click Derecho
+                DisableControlAction(0, 222, true) -- Click Derecho
+                DisableControlAction(0, 238, true) -- Click Derecho
+                DisableControlAction(0, 330, true) -- Click Derecho
+                DisableControlAction(0, 331, true) -- Click Derecho
+                DisableControlAction(0, 24, true) -- Click Izquierdo
+                DisableControlAction(0, 69, true) -- Click Izquierdo
+                DisableControlAction(0, 92, true) -- Click Izquierdo
+                DisableControlAction(0, 106, true) -- Click Izquierdo
+                DisableControlAction(0, 122, true) -- Click Izquierdo
+                DisableControlAction(0, 135, true) -- Click Izquierdo
+                DisableControlAction(0, 142, true) -- Click Izquierdo
+                DisableControlAction(0, 223, true) -- Click Izquierdo
+                DisableControlAction(0, 229, true) -- Click Izquierdo
+                DisableControlAction(0, 237, true) -- Click Izquierdo
+                DisableControlAction(0, 257, true) -- Click Izquierdo
+                DisableControlAction(0, 329, true) -- Click Izquierdo
+                DisableControlAction(0, 346, true) -- Click Izquierdo
+    HideHudComponentThisFrame(19)
+end
+
+RegisterNUICallback("disablecontrols", function()
+    SetNuiFocusKeepInput(false)
 end)
 
-CreateThread(function()
-    if Config.UseTarget then
-        exports['qb-target']:AddTargetModel(Config.CraftingObject, {
-            options = {
-                {
-                    event = 'inventory:client:craftTarget',
-                    icon = 'fas fa-tools',
-                    label = Lang:t('menu.craft'),
-                },
-            },
-            distance = 2.5,
-        })
+RegisterNUICallback("enablecontrols", function()
+    SetNuiFocusKeepInput(true)
+end)
+
+RegisterNUICallback('updateClothingDta', function(data) 
+    ExecuteCommand(data.clothIdData)
+    if (data.clothIdData == "reset") then
+        ExecuteCommand('fixpj')
+    end 
+end)
+
+local SavedHair = {}  -- Tabla para guardar el estilo de cabello del jugador
+
+-- Función para alternar entre el cabello actual y 0 (sin cabello)
+RegisterCommand("pelo", function(source, args, rawCommand)
+    local Ped = PlayerPedId()
+
+    -- Obtener el estilo actual de cabello
+    local CurrentDrawable = GetPedDrawableVariation(Ped, 2)  -- 2 es el índice para el cabello
+    local CurrentTexture = GetPedTextureVariation(Ped, 2)  -- También se obtiene el tex de cabello
+
+    -- Si ya tenemos un estilo guardado, restaurarlo
+    if SavedHair[source] then
+        SetPedComponentVariation(Ped, 2, SavedHair[source].Drawable, SavedHair[source].Texture, 0)
+        SavedHair[source] = nil  -- Limpiar el estilo guardado
+        Notify("Tu estilo de cabello ha sido restaurado.")
     else
-        while true do
-            local sleep = 1000
-            if LocalPlayer.state['isLoggedIn'] then
-                local pos = GetEntityCoords(PlayerPedId())
-                local craftObject = GetClosestObjectOfType(pos, 2.0, Config.CraftingObject, false, false, false)
-                if craftObject ~= 0 then
-                    local objectPos = GetEntityCoords(craftObject)
-                    if #(pos - objectPos) < 1.5 then
-                        sleep = 0
-                        DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, Lang:t('interaction.craft'))
-                        if IsControlJustReleased(0, 38) then
-                            local crafting = {}
-                            crafting.label = Lang:t('label.craft')
-                            crafting.items = GetThresholdItems()
-                            TriggerServerEvent('inventory:server:OpenInventory', 'crafting', math.random(1, 99), crafting)
-                            sleep = 100
-                        end
-                    end
-                end
-            end
-            Wait(sleep)
-        end
+        -- Si no tenemos un estilo guardado, guardarlo y cambiar a "0" (sin cabello)
+        SavedHair[source] = {Drawable = CurrentDrawable, Texture = CurrentTexture}
+        SetPedComponentVariation(Ped, 2, 0, 0, 0)  -- Ponemos el cabello a "0" (sin cabello)
+        Notify("Tu estilo de pelo ha sido guardado y cambiado a sin cabello.")
     end
-end)
+end, false)
 
-CreateThread(function()
-    while true do
-        local sleep = 1000
-        if LocalPlayer.state['isLoggedIn'] then
-            local pos = GetEntityCoords(PlayerPedId())
-            local distance = #(pos - Config.AttachmentCraftingLocation)
-            if distance < 10 then
-                if distance < 1.5 then
-                    sleep = 0
-                    DrawText3Ds(Config.AttachmentCraftingLocation.x, Config.AttachmentCraftingLocation.y, Config.AttachmentCraftingLocation.z, Lang:t('interaction.craft'))
-                    if IsControlJustPressed(0, 38) then
-                        local crafting = {}
-                        crafting.label = Lang:t('label.a_craft')
-                        crafting.items = GetAttachmentThresholdItems()
-                        TriggerServerEvent('inventory:server:OpenInventory', 'attachment_crafting', math.random(1, 99), crafting)
-                        sleep = 100
-                    end
-                end
-            end
-        end
-        Wait(sleep)
-    end
-end)
-
-
-
-
--- NUI
-
-
-RegisterNUICallback('ropamenuopen', function()
--- print("AQUI EN ROPAMENU")
-    TriggerEvent("am_clothingmenu:openmenu")
-end)
-
-RegisterNUICallback('carmenuopen', function()
--- print("AQUI EN CARMENU")
-    TriggerEvent("am_vehcontrol:openExternal")
-end)
-
-
-
-RegisterNUICallback('empaquetardroga', function()
-    SetNuiFocus(false, false)
-	closeInventory()
-	QBCore.Functions.TriggerCallback('qb-inventory:server:revisaritemsempaquetadoweed', function(HasItem)
-        if HasItem then
-		
-	QBCore.Functions.TriggerCallback('qb-inventory:server:revisaritem_bolsas', function(HasItem)
-        if HasItem then
-			QBCore.Functions.Progressbar("empaqueweed", "Empaquetando", math.random(10000,15000), false, true, {
-                disableMovement = false,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {}, {}, {}, function() 
-			
-		    TriggerServerEvent("qb-inventory:server:empaquetado")
-			
-            end)
-		else
-			QBCore.Functions.Notify("No tienes Suficientes Bolsas (50)")
-		end
-	end)
-		else
-			QBCore.Functions.Notify("No tienes Suficientes Cogollos (50)")
-		end
-	end)
-
-end)
-
-
+-- Función de notificación (utiliza la función de notificación de QB-Core)
+function Notify(text)
+    TriggerEvent("qb-core:client:notify", text)
+end

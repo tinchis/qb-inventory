@@ -1,0 +1,42 @@
+#clothes-tab {
+    padding: 2.5vh;
+    display: grid;
+    grid-template-columns: repeat(4, 8.75vh);
+    grid-gap: .5vh;
+    grid-auto-rows: minmax(8.75vh, auto);
+    position: relative;
+    padding: .75vh;
+    background: rgba(233, 233, 233, 0.075);
+    border-radius: .4vh;
+    margin-bottom: .2vh;
+}
+
+.cloth-but {
+    background-color: rgba(255, 255, 255, 0.4);
+	border: .1vh solid rgba(255, 255, 255, 0.3);
+    opacity: .925;
+    border-radius: .3vh;
+    backdrop-filter: blur(.8vh);
+    color: white;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.cloth-but:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+	border: .1vh solid rgba(255, 255, 255, 0.1);
+}
+
+.cloth-but:active {
+    background-color: rgba(255, 255, 255, 0.1);
+	border: .1vh solid rgba(255, 255, 255, 0.1);
+}
+
+.cloth-but:focus {
+    outline: none;
+}
+
+.toggled-cloth {
+    background-color: rgba(0, 255, 191, 0.4);
+	border: .1vh solid rgba(0, 255, 213, 0.3);
+}
