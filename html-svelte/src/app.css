@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    user-select: none !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+}
+
+p {
+    margin: 0 !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(240 3.7% 15.9%);
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(240 5% 64.9%);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(142.1 76.2% 36.3%);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInDelayed {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    40% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+body {
+    overflow: hidden;
+    background: transparent;
+}
+
+.dragging {
+    opacity: 0.5;
+    cursor: move;
+    z-index: 9999;
+    transform: scale(1.05);
+}
