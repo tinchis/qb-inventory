@@ -25,9 +25,9 @@ client_scripts {
 	'clothing/Variations.lua',		-- Variants, this is where you wanan change stuff around most likely.
 	'clothing/Clothing.lua'
 }
-
-ui_page 'html/ui-svelte.html'
-
+ui_page {
+    'html/ui.html'
+}
 files {
     'html/ui.html',
     'html/css/**',
