@@ -1,11 +1,13 @@
-const DEBUG_MODE = typeof window.GetParentResourceName === 'undefined';
+(function () {
+    if (typeof window.GetParentResourceName !== 'undefined') {
+        return;
+    }
 
-if (DEBUG_MODE) {
     window.GetParentResourceName = () => 'qb-inventory';
 
     const originalFetch = window.fetch;
     window.fetch = function (url, options) {
-        if (url && url.includes('https://qb-inventory/')) {
+        if (url && typeof url === 'string' && url.includes('https://qb-inventory/')) {
             return Promise.resolve({
                 json: () => Promise.resolve({}),
                 ok: true,
@@ -15,19 +17,25 @@ if (DEBUG_MODE) {
         return originalFetch.apply(this, arguments);
     };
 
-    const originalPost = $.post;
-    $.post = function (url, data, success, dataType) {
-        if (url && url.includes('https://qb-inventory/')) {
-            if (typeof success === 'function') {
-                success({});
+    if (typeof $ !== 'undefined' && $.post) {
+        const originalPost = $.post;
+        $.post = function (url, data, success, dataType) {
+            if (url && typeof url === 'string' && url.includes('https://qb-inventory/')) {
+                if (typeof success === 'function') {
+                    success({});
+                }
+                return Promise.resolve({});
             }
-            return Promise.resolve({});
-        }
-        return originalPost.apply(this, arguments);
-    };
+            return originalPost.apply(this, arguments);
+        };
+    }
 
     window.addEventListener('load', () => {
         setTimeout(() => {
+            if (typeof window.Inventory === 'undefined') {
+                return;
+            }
+
             const mockData = {
                 action: 'open',
                 slots: 30,
@@ -77,4 +85,4 @@ if (DEBUG_MODE) {
     });
 
     console.log('%c[DEBUG MODE] Modo debug activado - El inventario funciona en el navegador', 'color: #00ff00; font-weight: bold;');
-}
+})();
