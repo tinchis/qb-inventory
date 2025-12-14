@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Nunito;
+    font-family: "IBM Plex Mono", monospace;
 }
 
 .tmenu-title {
     /* background-color: rgba(78, 48, 48, 0.722); */
     color: white;
-    font-family: BebasKai;
+    font-family: "IBM Plex Mono", monospace;
     font-size: 2.5vh;
     width: 100%;
     padding: 1vh;
@@ -18,7 +18,7 @@
     flex-direction: row;
     align-items: center;
     gap: 1vh;
-    font-family: "Nunito";
+    font-family: "IBM Plex Mono", monospace;
 }
 
 .tmenu-options {
@@ -49,7 +49,7 @@
 
 .tmenu-option:focus {
     outline: 0;
-} 
+}
 
 .tmenu-option:hover {
     background-color: rgba(20, 20, 20, 0.566);
@@ -64,7 +64,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    font-family: BebasKai;
+    font-family: "IBM Plex Mono", monospace;
     font-size: 2vh;
     width: 100%;
     color: rgba(255, 255, 255, 0.575);
@@ -75,5 +75,5 @@
     font-size: 1.4vh;
     width: 100%;
     text-align: left;
-    font-family: Nunito;
+    font-family: "IBM Plex Mono", monospace;
 }

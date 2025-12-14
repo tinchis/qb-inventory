@@ -18,7 +18,7 @@ $(document).on("keyup", function () {
     switch (event.keyCode) {
         case 27: // ESC
             Inventory.Close();
-        break;
+            break;
     }
 });
 
@@ -29,7 +29,7 @@ $(document).on("keydown", function () {
     switch (event.keyCode) {
         case 113: // F2
             Inventory.Close();
-        break;
+            break;
     }
 });
 
@@ -375,7 +375,7 @@ function generateDescription(itemData) {
     }
     switch (itemData.name) {
         default:
-        return `<p>${itemData.description}</p>
+            return `<p>${itemData.description}</p>
         <p><strong> Caducidad: </strong><span>${Math.floor(itemData.info.quality)}</span></p>`;
     }
 }
@@ -502,7 +502,7 @@ function handleDragDrop() {
             setTimeout(function () {
                 IsDragging = false;
             }, 300);
-            $(this).css("background", "rgba(255, 255, 255, 0.4)");
+            $(this).css("background", "rgba(255, 255, 255, 0.03)");
             $(this).find("img").css("filter", "brightness(100%)");
         },
     });
@@ -796,12 +796,12 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
         }
     }
 
-    if ( $toInv.attr("data-inventory") == "player" && $toSlot < 6 ) {
+    if ($toInv.attr("data-inventory") == "player" && $toSlot < 6) {
         $toInv = $(".player-inventory-keys");
         toData = $toInv.find("[data-slot=" + $toSlot + "]").data("item");
     }
 
-    if ( $fromInv.attr("data-inventory") == "player" && $fromSlot < 6 ) {
+    if ($fromInv.attr("data-inventory") == "player" && $fromSlot < 6) {
         $fromInv = $(".player-inventory-keys");
         fromData = $fromInv.find("[data-slot=" + $fromSlot + "]").data("item");
     }
@@ -838,7 +838,7 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
             newData.slot = parseInt($toSlot);
 
             if (newData.name == fromData.name) {
-                if (newData.info.quality !== fromData.info.quality  ) {
+                if (newData.info.quality !== fromData.info.quality) {
                     InventoryError($fromInv, $fromSlot);
                     $.post(
                         "https://qb-inventory/Notify",
@@ -1520,8 +1520,8 @@ var requiredItemOpen = false;
         $("#item-amount").val("0");
         $(".tab").hide();
         $("#inv-tab").show();
-        $(".tab-menu-btn").removeClass("tab-selected")   
-        $(".inv-container-left").css({opacity: "100%"}) 
+        $(".tab-menu-btn").removeClass("tab-selected")
+        $(".inv-container-left").css({ opacity: "100%" })
         $("#tab-inv-btn").addClass("tab-selected")
         totalWeight = 0;
         totalWeightOther = 0;
@@ -1585,7 +1585,7 @@ var requiredItemOpen = false;
                             .addClass("item-drag");
                         $(".player-inventory-keys")
                             .find("[data-slot=" + item.slot + "]")
-                            .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                         $(".player-inventory-keys")
                             .find("[data-slot=" + item.slot + "]")
                             .data("item", item);
@@ -1595,7 +1595,7 @@ var requiredItemOpen = false;
                             .addClass("item-drag");
                         $(".player-inventory")
                             .find("[data-slot=" + item.slot + "]")
-                            .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                         $(".player-inventory")
                             .find("[data-slot=" + item.slot + "]")
                             .data("item", item);
@@ -1605,7 +1605,7 @@ var requiredItemOpen = false;
                             .addClass("item-drag");
                         $(".player-inventory")
                             .find("[data-slot=" + item.slot + "]")
-                            .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                         $(".player-inventory")
                             .find("[data-slot=" + item.slot + "]")
                             .data("item", item);
@@ -1635,7 +1635,7 @@ var requiredItemOpen = false;
                     } else {
                         $(".other-inventory")
                             .find("[data-slot=" + item.slot + "]")
-                            .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                     }
                     $(".other-inventory")
                         .find("[data-slot=" + item.slot + "]")
@@ -1748,7 +1748,7 @@ var requiredItemOpen = false;
                         .addClass("item-drag");
                     $(".player-inventory-keys")
                         .find("[data-slot=" + item.slot + "]")
-                        .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
+                        .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
                     $(".player-inventory-keys")
                         .find("[data-slot=" + item.slot + "]")
                         .data("item", item);
@@ -1758,7 +1758,7 @@ var requiredItemOpen = false;
                         .addClass("item-drag");
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
-                        .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
+                        .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
                         .data("item", item);
@@ -1768,7 +1768,7 @@ var requiredItemOpen = false;
                         .addClass("item-drag");
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
-                        .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
+                        .html('<div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + '</p></div><div class="item-slot-label"><p>' + item.label + "</p></div>");
                     $(".player-inventory")
                         .find("[data-slot=" + item.slot + "]")
                         .data("item", item);
@@ -1799,11 +1799,11 @@ var requiredItemOpen = false;
                     if (item.slot == 41) {
                         $(".z-hotbar-inventory")
                             .find("[data-zhotbarslot=" + item.slot + "]")
-                            .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-key"><p>6</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                     } else {
                         $(".z-hotbar-inventory")
                             .find("[data-zhotbarslot=" + item.slot + "]")
-                            .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount  + "</p></div>" + ItemLabel);
+                            .html('<div class="item-slot-key"><p>' + item.slot + '</p></div><div class="item-slot-img"><img src="images/' + item.image + '" alt="' + item.name + '" /></div><div class="item-slot-amount"><p>' + item.amount + "</p></div>" + ItemLabel);
                     }
                     Inventory.QualityCheck(item, true, false);
                 }
@@ -1864,9 +1864,9 @@ var requiredItemOpen = false;
         $(".itemboxes-container").prepend($itembox);
         $itembox.fadeIn(250);
         setTimeout(function () {
-        $.when($itembox.fadeOut(300)).done(function () {
-            $itembox.remove();
-        });
+            $.when($itembox.fadeOut(300)).done(function () {
+                $itembox.remove();
+            });
         }, 3000);
     };
 
@@ -1942,16 +1942,16 @@ $(document).keyup((e) => {
     }
 });
 
-$("#item-amount").on("click", function() {
-    $.post('https://qb-inventory/disablecontrols'); 
+$("#item-amount").on("click", function () {
+    $.post('https://qb-inventory/disablecontrols');
 });
 
-$(document).on("mouseenter", ".item-slot", function(e) {
+$(document).on("mouseenter", ".item-slot", function (e) {
     e.preventDefault();
     if ($(this).data("item") != null) {
         let bottom = ($(window).height() - ($(this).offset().top + $(this).outerHeight()));
         let right = ($(window).width() - ($(this).offset().left + $(this).outerWidth()));
-        $(".ply-iteminfo-container").css({"bottom": bottom, "right": right, "transform": "translate(-3.5vw, -3.5vw)"});
+        $(".ply-iteminfo-container").css({ "bottom": bottom, "right": right, "transform": "translate(-3.5vw, -3.5vw)" });
         $(".ply-iteminfo-container").show();
         FormatItemInfo($(this).data("item"));
     } else {

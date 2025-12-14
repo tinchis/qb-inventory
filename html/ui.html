@@ -13,12 +13,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"
         integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -33,26 +36,33 @@
                 <div class="other-inventory" data-inventory="other"></div>
             </div>
         </div>
-        <div class="inv-container">
-            <div
-                style="display: flex; flex-direction: row; width: 95%; justify-content: space-between; margin-bottom: 1vh;">
-                <div class="tab-menu">
-                    <button class="tab-menu-btn tab-selected" id="tab-inv-btn" tab="inv">
-                        <i class="fas fa-backpack" style="pointer-events: none;"></i>
-                    </button>
-                    <button class="tab-menu-btn" tab="emotes">
-                        <i class="fas fa-music" style="pointer-events: none;"></i>
-                    </button>
-                    <button class="tab-menu-btn" tab="clothes">
-                        <i class="fas fa-tshirt" style="pointer-events: none;"></i>
-                    </button>
+        <div class="flex flex-col gap-2 inv-container py-3 px-3 rounded-[10px]"
+            style="background-color: rgba(9, 9, 9, 0.93); border: 1px solid #242424;">
+            <div class="flex items-center gap-2 w-full px-3 py-2 rounded-md"
+                style="background: linear-gradient(to right, #0F7168, #16978B); border: #3E8982 solid 1px">
+                <svg width="35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.9336 3.70403C12.6724 3.63191 12.3931 3.66892 12.1597 3.80659L4.26165 8.39199L3.42352 6.85571L1.66778 7.81357L3.00111 10.2575C3.13098 10.4954 3.35178 10.6704 3.61298 10.7425C3.87418 10.8146 4.15351 10.7776 4.38698 10.6399L12.2848 6.0546L13.0443 7.44693C13.2834 7.29593 13.5266 7.1482 13.774 7.00468C14.1076 6.81127 14.4439 6.62852 14.7812 6.45469L13.5455 4.18912C13.4156 3.9512 13.1948 3.77613 12.9336 3.70403Z"
+                        fill="white" />
+                    <path
+                        d="M14.7787 6.45436L16.8243 10.2045L17.4815 9.81015C17.712 9.6718 17.9887 9.63215 18.2488 9.70013C18.509 9.76812 18.7308 9.93803 18.8642 10.1715L21.5309 14.8382C21.8008 15.3104 21.6436 15.9119 21.1771 16.1918L17.8438 18.1918C17.6132 18.3302 17.3366 18.3698 17.0764 18.3018C16.8163 18.2338 16.5944 18.0639 16.4611 17.8304L13.7944 13.1638C13.5244 12.6915 13.6816 12.09 14.1482 11.8101L15.1079 11.2343L13.0418 7.4466C12.3799 7.8646 11.749 8.30775 11.1428 8.75659C8.61163 10.6308 7.61777 13.9694 8.86777 16.6596C9.5831 18.199 10.3522 19.786 11.2499 21.3475C12.1475 22.909 13.1316 24.3715 14.1014 25.7632C15.7983 28.1986 19.1797 29.0042 22.0639 27.7388C23.0033 27.3267 23.9568 26.8694 24.8895 26.3286C25.8223 25.7878 26.6932 25.1872 27.5183 24.5763C30.0493 22.7022 31.0435 19.3635 29.7934 16.6732C29.078 15.1339 28.3089 13.5468 27.4113 11.9854C26.5136 10.4239 25.5296 8.96148 24.5598 7.56968C22.8629 5.13429 19.4813 4.32875 16.5972 5.59401C15.9938 5.85877 15.3846 6.14217 14.7787 6.45436Z"
+                        fill="white" />
+                    <path d="M17.6345 12.0508L19.3086 14.9805L17.6906 15.9513L16.0165 13.0216L17.6345 12.0508Z"
+                        fill="white" />
+                </svg>
+
+                <div class="flex flex-col gap-0.5 tracking-tight" style="font-family: 'IBM Plex Mono', monospace;">
+                    <a class="text-sm text-white">
+                        Para dar un item</a>
+                    <a class="text-xs text-nowrap" style="color:#90C9C4">
+                        pulsa la ruedita del ratón sobre el objeto.
+                    </a>
                 </div>
-                <div id="cantidad_back" style="display: flex; flex-direction: column; justify-content: center;">
-                    <span
-                        style="color: white; opacity: .8; font-size: 1vh; text-align: center; font-family: Quicksand;">CANTIDAD</span>
-                    <input type="number" id="item-amount" class="inv-option-item" min='0' placeholder="" pattern="[0-9]"
-                        onfocus="this.value=''" placeholder="" oninput="validity.valid||(value='');"></input>
-                </div>
+            </div>
+            <div class="w-full">
+                <input type="number" id="item-amount" class="inv-option-item"
+                    style="border: 1px solid #262626; border-radius: 6px; background-color: #0D0D0D; color: #8C8C8C; font-family: 'IBM Plex Mono', monospace; font-size: 0.9vh;"
+                    min='0' pattern="[0-9]" onfocus="this.value=''" oninput="validity.valid||(value='');">
             </div>
             <div class="tab" id="inv-tab">
                 <!-- <div class="inv-options">
@@ -138,11 +148,21 @@
                                 d="M18.8 6.4c-1.884-2.512-4.28-3.9-6.8-3.9c-2.52 0-4.916 1.388-6.8 3.9c-1.417 1.889-3.126 4.44-3.362 7.124c-.121 1.384.147 2.801 1.019 4.15c.861 1.332 2.268 2.531 4.315 3.58c1.259.645 2.63-.22 2.809-1.483a6.48 6.48 0 0 1-1.162-1.001c-1.013-1.105-1.82-2.723-1.82-4.77c0-3.428 1.77-5.735 3.9-6.344c.282-.08.6.132.634.424a5 5 0 0 0 4.917 4.42c.674.006.55 1.06.55 1.5c0 2.047-.806 3.665-1.82 4.77c-.362.396-.76.734-1.164 1.003c.16 1.268 1.518 2.14 2.778 1.531c2.165-1.044 3.643-2.243 4.538-3.585c.907-1.362 1.163-2.797 1.007-4.194c-.3-2.69-2.138-5.257-3.54-7.125Z" />
                         </g>
                     </svg></button>
-                <button class="cloth-but" id="bagoff"><svg xmlns="http://www.w3.org/2000/svg" width="4vh" height="4vh"
-                        viewBox="0 0 256 256">
-                        <path fill="currentColor"
-                            d="M168 40.58V32a24 24 0 0 0-24-24h-32a24 24 0 0 0-24 24v8.58A56.09 56.09 0 0 0 40 96v120a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V96a56.09 56.09 0 0 0-48-55.42M104 32a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v8h-48Zm8 40h32a8 8 0 0 1 0 16h-32a8 8 0 0 1 0-16m64 144H80v-40h56v8a8 8 0 0 0 16 0v-8h24Zm0-56H80v-8a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16Z" />
-                    </svg></button>
+                <button class="cloth-but" id="bagoff">
+                    <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.5 9.5C0.5 8.30653 0.974105 7.16193 1.81802 6.31802C2.66193 5.47411 3.80652 5 5 5H14C15.1935 5 16.3381 5.47411 17.182 6.31802C18.0259 7.16193 18.5 8.30653 18.5 9.5V20.75C18.5 21.3467 18.2629 21.919 17.841 22.341C17.419 22.7629 16.8467 23 16.25 23H2.75C2.15326 23 1.58097 22.7629 1.15901 22.341C0.737053 21.919 0.5 21.3467 0.5 20.75V9.5Z"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M6.125 5V2.75C6.125 2.15326 6.36205 1.58097 6.78401 1.15901C7.20597 0.737053 7.77826 0.5 8.375 0.5H10.625C11.2217 0.5 11.794 0.737053 12.216 1.15901C12.6379 1.58097 12.875 2.15326 12.875 2.75V5"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M5 21.875V16.25C5 15.6533 5.23705 15.081 5.65901 14.659C6.08097 14.2371 6.65326 14 7.25 14H11.75C12.3467 14 12.919 14.2371 13.341 14.659C13.7629 15.081 14 15.6533 14 16.25V21.875"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5 18.5H14" stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </button>
                 <button class="cloth-but" id="pants"><svg xmlns="http://www.w3.org/2000/svg" width="4vh" height="4vh"
                         viewBox="0 0 256 256">
                         <path fill="currentColor"
@@ -154,6 +174,85 @@
                             d="M18.258 3.508a.75.75 0 0 1 .463.693v4.243a.75.75 0 0 1-.75.75h-4.243a.75.75 0 0 1-.53-1.28L14.8 6.31a7.25 7.25 0 1 0 4.393 5.783a.75.75 0 0 1 1.488-.187A8.75 8.75 0 1 1 15.93 5.18l1.51-1.51a.75.75 0 0 1 .817-.162" />
                     </svg></button>
                 <!-- </div> -->
+            </div>
+            <div class="flex w-full h-[80px] rounded-lg overflow-hidden"
+                style="background-color: #111111; border: #2D2D2D solid 1px;">
+                <button
+                    class="py-3 tab-menu-btn tab-selected flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80 rounded-l-lg"
+                    style="background-color: #1C1C1C;" id="tab-inv-btn" tab="inv">
+                    <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.5 9.5C0.5 8.30653 0.974105 7.16193 1.81802 6.31802C2.66193 5.47411 3.80652 5 5 5H14C15.1935 5 16.3381 5.47411 17.182 6.31802C18.0259 7.16193 18.5 8.30653 18.5 9.5V20.75C18.5 21.3467 18.2629 21.919 17.841 22.341C17.419 22.7629 16.8467 23 16.25 23H2.75C2.15326 23 1.58097 22.7629 1.15901 22.341C0.737053 21.919 0.5 21.3467 0.5 20.75V9.5Z"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M6.125 5V2.75C6.125 2.15326 6.36205 1.58097 6.78401 1.15901C7.20597 0.737053 7.77826 0.5 8.375 0.5H10.625C11.2217 0.5 11.794 0.737053 12.216 1.15901C12.6379 1.58097 12.875 2.15326 12.875 2.75V5"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M5 21.875V16.25C5 15.6533 5.23705 15.081 5.65901 14.659C6.08097 14.2371 6.65326 14 7.25 14H11.75C12.3467 14 12.919 14.2371 13.341 14.659C13.7629 15.081 14 15.6533 14 16.25V21.875"
+                            stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5 18.5H14" stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
+                        style="color: #626262;">
+                        Inventario
+                    </p>
+                </button>
+
+                <div class="h-full w-px" style="background-color: #242424;"></div>
+
+                <button
+                    class="py-3 tab-menu-btn flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80"
+                    style="background-color: #111111;" id="tab-emotes-btn" tab="emotes">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.75 17.875V3.25L21.25 1V15.625" stroke="#C9C9C9" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M4.375 21.25C6.23896 21.25 7.75 19.739 7.75 17.875C7.75 16.011 6.23896 14.5 4.375 14.5C2.51104 14.5 1 16.011 1 17.875C1 19.739 2.51104 21.25 4.375 21.25Z"
+                            stroke="#C9C9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M17.875 19C19.739 19 21.25 17.489 21.25 15.625C21.25 13.761 19.739 12.25 17.875 12.25C16.011 12.25 14.5 13.761 14.5 15.625C14.5 17.489 16.011 19 17.875 19Z"
+                            stroke="#C9C9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
+                        style="color: #626262;">
+                        Animaciones
+                    </p>
+                </button>
+
+                <div class="h-full w-px" style="background-color: #242424;"></div>
+
+                <button
+                    class="py-3 tab-menu-btn flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80 rounded-r-lg"
+                    style="background-color: #111111;" id="tab-clothes-btn" tab="clothes">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.3938 2.6425L16.4663 1C16.4663 2.19347 15.9922 3.33807 15.1483 4.18198C14.3044 5.02589 13.1598 5.5 11.9663 5.5C10.7729 5.5 9.62826 5.02589 8.78434 4.18198C7.94043 3.33807 7.46633 2.19347 7.46633 1L2.53882 2.6425C2.02963 2.81214 1.59785 3.15822 1.32141 3.61826C1.04497 4.0783 0.942086 4.62201 1.03132 5.15125L1.68382 9.055C1.72666 9.31928 1.86234 9.55961 2.06648 9.73283C2.27063 9.90604 2.52985 10.0008 2.79757 10H5.21632V21.25C5.21632 22.4875 6.22882 23.5 7.46633 23.5H16.4663C17.0631 23.5 17.6354 23.2629 18.0573 22.841C18.4793 22.419 18.7163 21.8467 18.7163 21.25V10H21.1351C21.4028 10.0008 21.662 9.90604 21.8662 9.73283C22.0703 9.55961 22.206 9.31928 22.2488 9.055L22.9013 5.15125C22.9906 4.62201 22.8877 4.0783 22.6112 3.61826C22.3348 3.15822 21.903 2.81214 21.3938 2.6425Z"
+                            stroke="#C9C9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
+                        style="color: #626262;">
+                        Vestimenta
+                    </p>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-1 px-3 w-full py-2 rounded-md"
+                style="background-color: #0D0D0D; border: 1px solid #2D2D2D;">
+                <svg class="block w-4 h-4" width="15" height="14" viewBox="0 0 15 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M13.3709 14C14.2706 14 15 13.2494 15 12.3236C15 12.0717 14.9449 11.8235 14.8392 11.5972L14.7908 11.5019L8.99554 0.900243C8.69156 0.344213 8.11995 0 7.5 0C6.91877 0 6.38002 0.302565 6.06445 0.798574L6.0045 0.900243L0.209163 11.5019C0.0720419 11.7527 1.39535e-05 12.0358 0 12.3236C0 13.2494 0.729391 14 1.62904 14H13.3709ZM7.5 8.79487C7.11467 8.79487 6.80233 8.47345 6.80233 8.07692V4.84615C6.80233 4.44964 7.11467 4.12821 7.5 4.12821C7.88533 4.12821 8.19767 4.44964 8.19767 4.84615V8.07692C8.19767 8.47345 7.88533 8.79487 7.5 8.79487ZM7.5 11.3147C7.11467 11.3147 6.80233 10.9933 6.80233 10.5968V10.5897C6.80233 10.1932 7.11467 9.87179 7.5 9.87179C7.88533 9.87179 8.19767 10.1932 8.19767 10.5897V10.5968C8.19767 10.9933 7.88533 11.3147 7.5 11.3147Z"
+                        fill="#0F7067" />
+                </svg>
+                <a class="text-[12px] text-nowrap"
+                    style="color: #8C8C8C; font-family: 'IBM Plex Mono', monospace; white-space: nowrap;">
+                    presiona <span class="bg-[#1F1F1F] px-1 py-[2px]"
+                        style="border: #2F2F2F solid 1px; border-radius: 5px; font-weight: 600;">clic
+                        derecho</span> para
+                    <span style="color:#0F7067; font-weight: 600">
+                        dropear un item
+                    </span>
+                </a>
             </div>
         </div>
         <div class="ply-hotbar-inventory" data-inventory="hotbar"></div>

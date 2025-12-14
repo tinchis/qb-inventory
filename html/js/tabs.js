@@ -2,19 +2,18 @@ $(document).on("click", ".tab-menu-btn", (e) => {
     $(".itemboxes-container").remove();
     $(".ply-iteminfo-container").fadeOut(100);
     $(".tab").fadeOut(200);
+    const $button = $(e.currentTarget);
     setTimeout(() => {
-        $(".tab-menu-btn").removeClass("tab-selected");  
-        $(e.target).addClass("tab-selected");
-        $(`#${$(e.target).attr("tab")}-tab`).fadeIn();
-        if ($(e.target).attr("tab") !== 'inv') {
-            $(".inv-container-left").css({opacity: "0%"})
-            // $(".inv-container").css("top", "34vh");
-        }else {
-            $(".inv-container-left").css({opacity: "100%"})
-            if ($(".inv-container-left").is(":hidden")){
-                // $(".inv-container").css("top", "34vh");
-            }else {
-                // $(".inv-container").css("top", "4vh");
+        $(".tab-menu-btn").removeClass("tab-selected").css("background-color", "#111111");
+        $button.addClass("tab-selected").css("background-color", "#1C1C1C");
+        const tabName = $button.attr("tab");
+        $(`#${tabName}-tab`).fadeIn();
+        if (tabName !== 'inv') {
+            $(".inv-container-left").css({ opacity: "0%" })
+        } else {
+            $(".inv-container-left").css({ opacity: "100%" })
+            if ($(".inv-container-left").is(":hidden")) {
+            } else {
             }
         }
     }, 200);
@@ -40,7 +39,7 @@ $(document).on("click", ".tab-menu-btn", (e) => {
 // });
 
 
-window.addEventListener("message", ({data}) => {
+window.addEventListener("message", ({ data }) => {
     if (data.action === "emotesHTML") {
         $("#emotes-tab").html(data.html);
     }
