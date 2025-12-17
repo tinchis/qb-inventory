@@ -10,8 +10,12 @@ $(document).on("click", ".tab-menu-btn", (e) => {
         $(`#${tabName}-tab`).fadeIn();
         if (tabName !== 'inv') {
             $(".inv-container-left").css({ opacity: "0%" })
+            if (tabName === 'clothes' || tabName === 'emotes') {
+                $("#item-amount").parent().hide();
+            }
         } else {
             $(".inv-container-left").css({ opacity: "100%" })
+            $("#item-amount").parent().show();
             if ($(".inv-container-left").is(":hidden")) {
             } else {
             }
