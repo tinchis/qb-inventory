@@ -189,7 +189,13 @@ function createMenu(data, submenu) {
     });
 
     $(`.${data.name}-menu-option`).click((e) => {
-        const opcion = JSON.parse($(e.target).attr('opt').replaceAll("'", '"'));
+        e.preventDefault();
+        e.stopPropagation();
+        const $button = $(e.currentTarget).closest(`.${data.name}-menu-option`);
+        if ($button.length === 0) return;
+        const optAttr = $button.attr('opt');
+        if (!optAttr) return;
+        const opcion = JSON.parse(optAttr.replaceAll("'", '"'));
         if (opcion.submenu) {
             const submenuName = data.name + '-' + opcion.submenu.name;
             const existingIndex = menuBreadcrumb.findIndex(b => b.name === submenuName);
@@ -274,7 +280,8 @@ function updateBreadcrumb(menuName) {
 
 window.addEventListener("load", () => {
     setTimeout(() => {
-        if (createdMenus.length === 0) {
+        const isInBrowser = window.location.protocol === 'file:' || window.location.hostname === '';
+        if (createdMenus.length === 0 && isInBrowser) {
             console.log("[DEBUG] No hay menús registrados, simulando menú de debug para pruebas en navegador");
             const debugMenu = {
                 name: "debug_menu",
