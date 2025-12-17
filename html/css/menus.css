@@ -90,6 +90,7 @@
     align-content: flex-start;
     flex: 1;
     min-height: 0;
+    max-height: 60vh;
 }
 
 .tmenu-option {
@@ -103,7 +104,7 @@
     padding: 1.8vh;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.7vh;
     text-align: left;
     position: relative;
@@ -175,6 +176,10 @@
 }
 
 .tmenu-option-text-container {
+    display: none;
+}
+
+.tmenu-option .flex.flex-col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -182,6 +187,13 @@
     gap: 0.1vh;
     flex: 1;
     min-width: 0;
+}
+
+.tmenu-option .flex.items-center {
+    display: flex;
+    align-items: center;
+    gap: 1.5vh;
+    flex: 1;
 }
 
 

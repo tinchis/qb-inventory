@@ -170,12 +170,14 @@ function createMenu(data, submenu) {
         $(`#${data.name}-tab .tmenu-options`).append(`
             <button class="tmenu-option ${data.name}-menu-option" opt = "${opjson}"
             ${opt.disable ? 'style="pointer-events: none;"' : ''}>
-                <div class="tmenu-option-icon">
-                    <i class="${opt.icon}"></i>
-                </div>
-                <div class="tmenu-option-text-container">
-                    <div class="tmenu-option-title">${opt.title}</div>
-                    ${opt.description ? `<div class="tmenu-option-description">${opt.description}</div>` : ''}
+                <div class="flex items-center gap-1.5" style="flex: 1;">
+                    <div class="tmenu-option-icon">
+                        <i class="${opt.icon}"></i>
+                    </div>
+                    <div class="flex flex-col" style="flex: 1;">
+                        <div class="tmenu-option-title">${opt.title}</div>
+                        ${opt.description ? `<div class="tmenu-option-description">${opt.description}</div>` : ''}
+                    </div>
                 </div>
                 ${opt.submenu ? '<div class="tmenu-option-arrow"><i class="fa-solid fa-chevron-right"></i></div>' : ''}
             </button>
