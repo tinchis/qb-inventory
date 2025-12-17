@@ -8,9 +8,12 @@ $(document).on("click", ".tab-menu-btn", (e) => {
         $button.addClass("tab-selected").css("background-color", "#1C1C1C");
         const tabName = $button.attr("tab");
         $(`#${tabName}-tab`).fadeIn();
+        if (tabName === 'menus' && typeof updateMenusTab === 'function') {
+            updateMenusTab();
+        }
         if (tabName !== 'inv') {
             $(".inv-container-left").css({ opacity: "0%" })
-            if (tabName === 'clothes' || tabName === 'emotes') {
+            if (tabName === 'clothes' || tabName === 'emotes' || tabName === 'menus') {
                 $("#item-amount").parent().hide();
             }
         } else {
