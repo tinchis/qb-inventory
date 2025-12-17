@@ -30,7 +30,7 @@ $(document).on("click", ".tab-menu-btn", (e) => {
         } else {
             $(".inv-container-left").css({ opacity: "100%" })
             $("#item-amount").parent().show();
-            $(".flex.items-center.gap-1.px-3").show();
+            $("#drop-item-message").show();
             if ($(".inv-container-left").is(":hidden")) {
             } else {
             }

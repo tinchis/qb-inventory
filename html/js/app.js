@@ -1524,6 +1524,7 @@ var requiredItemOpen = false;
         $(".inv-container-left").css({ opacity: "100%" });
         $("#tab-inv-btn").addClass("tab-selected").css("background-color", "#1C1C1C");
         $("#item-amount").parent().show();
+        $("#drop-item-message").show();
         totalWeight = 0;
         totalWeightOther = 0;
 

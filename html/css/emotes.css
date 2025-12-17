@@ -8,7 +8,7 @@
     min-height: 0;
 }
 
-.menu-container {
+#emotes-tab .menu-container {
     position: relative;
     align-items: center;
     display: flex;
@@ -29,7 +29,7 @@
     color: #8C8C8C;
 }
 
-.sidebar {
+#emotes-tab .sidebar {
     width: 2.5vh;
     height: 2.5vh;
     display: flex;
@@ -41,17 +41,17 @@
     font-size: 2vh !important;
 }
 
-.sidebar:hover {
+#emotes-tab .sidebar:hover {
     transform: none;
     color: #90C9C4 !important;
     transition: color 0.25s ease;
 }
 
-.sidebar[style*="color: #999999"] {
+#emotes-tab .sidebar[style*="color: #999999"] {
     color: #90C9C4 !important;
 }
 
-.navbar {
+#emotes-tab .navbar {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -65,7 +65,7 @@
     background-color: transparent;
 }
 
-#info-container {
+#emotes-tab #info-container {
     position: absolute;
     width: fit-content;
     top: -4.5vh;
@@ -84,7 +84,7 @@
     text-transform: uppercase;
 }
 
-.controls {
+#emotes-tab .controls {
     position: relative;
     height: 3.5vh;
     width: 3.5vh;
@@ -101,7 +101,7 @@
     flex-shrink: 0;
 }
 
-.controls span {
+#emotes-tab .controls span {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -111,17 +111,17 @@
     font-size: 1.6vh;
 }
 
-.controls:hover {
+#emotes-tab .controls:hover {
     background-color: #111111;
     border-color: #464646;
     transform: none;
 }
 
-.controls:hover span {
+#emotes-tab .controls:hover span {
     color: #90C9C4;
 }
 
-.search-bar {
+#emotes-tab .search-bar {
     font-size: 1.4vh;
     color: #C9C9C9;
     background-color: #181818;
@@ -137,21 +137,21 @@
     letter-spacing: 0.05em;
 }
 
-.search-bar::placeholder {
+#emotes-tab .search-bar::placeholder {
     color: #626262;
     text-transform: uppercase;
     font-weight: 300;
     letter-spacing: 0.05em;
 }
 
-.search-bar:focus {
+#emotes-tab .search-bar:focus {
     outline: none;
     background-color: #111111;
     border-color: #464646;
     color: #FFFFFF;
 }
 
-.anims-block {
+#emotes-tab .anims-block {
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -183,7 +183,7 @@
     background-color: #ffffff;
 } */
 
-.anim {
+#emotes-tab .anim {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -202,17 +202,17 @@
     outline: 0;
 }
 
-.anim:hover {
+#emotes-tab .anim:hover {
     background-color: #111111;
     border-color: #464646;
 }
 
-.anim:active {
+#emotes-tab .anim:active {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(15, 112, 104, 0.1);
 }
 
-.anim div {
+#emotes-tab .anim div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -225,7 +225,7 @@
     transition: 0.2s;
 }
 
-.anim div span:first-of-type {
+#emotes-tab .anim div span:first-of-type {
     color: #FFFFFF;
     text-shadow: none;
     font-family: "IBM Plex Mono", monospace;
@@ -236,7 +236,7 @@
     line-height: 1.4;
 }
 
-.anim div span:last-of-type {
+#emotes-tab .anim div span:last-of-type {
     color: #8C8C8C;
     text-shadow: none;
     font-family: "IBM Plex Mono", monospace;
@@ -246,7 +246,7 @@
     line-height: 1.3;
 }
 
-.star {
+#emotes-tab .star {
     color: #8C8C8C;
     font-size: 1.6vh;
     margin-right: 0;
