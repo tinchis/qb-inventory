@@ -191,7 +191,7 @@ function createMenu(data, submenu) {
     $(`.${data.name}-menu-option`).click((e) => {
         e.preventDefault();
         e.stopPropagation();
-        const $button = $(e.currentTarget).closest(`.${data.name}-menu-option`);
+        const $button = $(e.currentTarget);
         if ($button.length === 0) return;
         const optAttr = $button.attr('opt');
         if (!optAttr) return;
