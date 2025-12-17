@@ -7,7 +7,13 @@ $(document).on("click", ".tab-menu-btn", (e) => {
         $(".tab-menu-btn").removeClass("tab-selected").css("background-color", "#111111");
         $button.addClass("tab-selected").css("background-color", "#1C1C1C");
         const tabName = $button.attr("tab");
-        $(`#${tabName}-tab`).fadeIn();
+        if (tabName === 'clothes') {
+            $(`#${tabName}-tab`).css('display', 'grid').fadeIn();
+        } else if (tabName === 'emotes') {
+            $(`#${tabName}-tab`).css('display', 'flex').fadeIn();
+        } else {
+            $(`#${tabName}-tab`).fadeIn();
+        }
         if (tabName === 'menus' && typeof updateMenusTab === 'function') {
             updateMenusTab();
         }
@@ -16,9 +22,15 @@ $(document).on("click", ".tab-menu-btn", (e) => {
             if (tabName === 'clothes' || tabName === 'emotes' || tabName === 'menus') {
                 $("#item-amount").parent().hide();
             }
+            if (tabName === 'menus') {
+                $("#drop-item-message").hide();
+            } else {
+                $("#drop-item-message").show();
+            }
         } else {
             $(".inv-container-left").css({ opacity: "100%" })
             $("#item-amount").parent().show();
+            $(".flex.items-center.gap-1.px-3").show();
             if ($(".inv-container-left").is(":hidden")) {
             } else {
             }
@@ -53,5 +65,13 @@ window.addEventListener("message", ({ data }) => {
 })
 
 window.addEventListener("load", () => {
+    $(".tab").hide();
+    $("#inv-tab").show();
+    $(".tab-menu-btn").removeClass("tab-selected").css("background-color", "#111111");
+    $("#tab-inv-btn").addClass("tab-selected").css("background-color", "#1C1C1C");
+    $(".inv-container-left").css({ opacity: "100%" });
+    $("#item-amount").parent().show();
+    $("#drop-item-message").show();
+
     $.post("https://qb-inventory/nuiReadyEmotes");
 })

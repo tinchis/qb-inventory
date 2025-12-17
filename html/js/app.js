@@ -1520,9 +1520,10 @@ var requiredItemOpen = false;
         $("#item-amount").val("0");
         $(".tab").hide();
         $("#inv-tab").show();
-        $(".tab-menu-btn").removeClass("tab-selected")
-        $(".inv-container-left").css({ opacity: "100%" })
-        $("#tab-inv-btn").addClass("tab-selected")
+        $(".tab-menu-btn").removeClass("tab-selected").css("background-color", "#111111");
+        $(".inv-container-left").css({ opacity: "100%" });
+        $("#tab-inv-btn").addClass("tab-selected").css("background-color", "#1C1C1C");
+        $("#item-amount").parent().show();
         totalWeight = 0;
         totalWeightOther = 0;
 

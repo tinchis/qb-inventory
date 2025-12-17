@@ -5,6 +5,94 @@ local nuiLoaded = false
 RegisterNUICallback("nuiReadyEmotes", function()
     nuiLoaded = true
 
+    if Config.DebugMode then
+        CreateThread(function()
+            Wait(1000)
+            createOption({
+                name = "debug_menu",
+                icon = "fa-solid fa-bug",
+                title = "Menú de Debug",
+                onlyvehicle = false,
+                options = {
+                    {
+                        icon = 'fa-solid fa-check-circle', 
+                        title = 'Opción Simple', 
+                        description = 'Esta es una opción simple sin submenu para probar el diseño',
+                        handler = function(element)
+                            QBCore.Functions.Notify("Opción Simple seleccionada", "success")
+                        end
+                    },
+                    {
+                        icon = 'fa-solid fa-star', 
+                        title = 'Opción con Descripción Larga', 
+                        description = 'Esta opción tiene una descripción más larga para ver cómo se ve el diseño cuando el texto es extenso y ocupa más espacio en la interfaz',
+                        handler = function(element)
+                            QBCore.Functions.Notify("Opción con descripción larga seleccionada", "info")
+                        end
+                    },
+                    {
+                        icon = 'fa-solid fa-folder-open', 
+                        title = 'Abrir Submenu', 
+                        description = 'Esta opción abre un submenu para probar la navegación entre menús',
+                        submenu = {
+                            name = 'submenuDebug',
+                            title = 'Submenu de Debug',
+                            icon = 'fa-solid fa-list',
+                            options = {
+                                {
+                                    title = 'Sub-opción 1',
+                                    description = 'Primera opción del submenu de prueba',
+                                    icon = 'fa-solid fa-circle',
+                                    handler = function(element)
+                                        QBCore.Functions.Notify("Sub-opción 1 seleccionada", "success")
+                                    end
+                                },
+                                {
+                                    title = 'Sub-opción 2',
+                                    description = 'Segunda opción del submenu con descripción',
+                                    icon = 'fa-solid fa-square',
+                                    handler = function(element)
+                                        QBCore.Functions.Notify("Sub-opción 2 seleccionada", "info")
+                                    end
+                                },
+                                {
+                                    title = 'Sub-opción Deshabilitada',
+                                    description = 'Esta opción está deshabilitada para probar el estado disabled',
+                                    icon = 'fa-solid fa-ban',
+                                    disable = true
+                                },
+                                {
+                                    title = 'Cerrar Inventario',
+                                    description = 'Esta opción cierra el inventario automáticamente',
+                                    icon = 'fa-solid fa-times',
+                                    closeinv = true,
+                                    handler = function(element)
+                                        QBCore.Functions.Notify("Cerrando inventario...", "success")
+                                    end
+                                }
+                            }
+                        }
+                    },
+                    {
+                        icon = 'fa-solid fa-ban', 
+                        title = 'Opción Deshabilitada', 
+                        description = 'Esta opción está deshabilitada para probar el diseño del estado disabled',
+                        disable = true
+                    },
+                    {
+                        icon = 'fa-solid fa-times-circle', 
+                        title = 'Cerrar Inventario', 
+                        description = 'Esta opción cierra el inventario cuando se selecciona',
+                        closeinv = true,
+                        handler = function(element)
+                            QBCore.Functions.Notify("Cerrando inventario...", "success")
+                        end
+                    }
+                }
+            })
+        end)
+    end
+
     -- CreateThread(function()
     --     local lastVehicle = 0
     --     local ms = 3000

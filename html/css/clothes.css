@@ -1,5 +1,5 @@
 #clothes-tab {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(5, 1fr);
     gap: .25vh;
     justify-content: flex-start;
