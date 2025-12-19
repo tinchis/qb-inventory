@@ -75,9 +75,8 @@ input[type="number"]::-webkit-outer-spin-button {
     content: "";
     inset: 0;
     z-index: -1;
-    /* filter: blur(.25vh); */
-    border-radius: .5vh;
-    border: 1px solid white;
+    border-radius: 10px;
+    border: none;
 }
 
 .inv-container-left {
