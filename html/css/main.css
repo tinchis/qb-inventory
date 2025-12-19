@@ -85,10 +85,9 @@ input[type="number"]::-webkit-outer-spin-button {
     top: 63vh;
     right: 49.5vh;
     padding: 1vh .9vh 1vh .8vh;
-    ;
-    background: linear-gradient(-44deg, rgba(5, 94, 67, 0.932), rgba(5, 51, 94, 0.706));
-    border: 1px solid white;
-    border-radius: .5vh;
+    background-color: rgba(9, 9, 9, 0.85);
+    border: none;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 1vh;
@@ -235,9 +234,15 @@ input[type="number"]::-webkit-outer-spin-button {
 .other-inventory {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: flex-start;
+    align-content: flex-start;
     width: auto;
-    height: 24vh;
+    height: auto;
     overflow-y: auto;
+}
+
+.other-inventory .item-slot {
+    backdrop-filter: blur(.8vh);
 }
 
 
