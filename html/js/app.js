@@ -1538,6 +1538,7 @@ var requiredItemOpen = false;
         }
 
         $("#qbcore-inventory").fadeIn(300);
+        $("#game-view").fadeIn(300);
         if (data.other != null && data.other != "") {
             $(".other-inventory").attr("data-inventory", data.other.name);
         } else {
@@ -1697,6 +1698,7 @@ var requiredItemOpen = false;
         $(".ply-hotbar-inventory").css("display", "block");
         $(".ply-iteminfo-container").css("display", "none");
         $("#qbcore-inventory").fadeOut(300);
+        $("#game-view").fadeOut(300);
         $(".combine-option-container").hide();
         $("#other-inv-progressbar").progressbar({ value: 0 });
         $("#other-inv-weight-value").html("");
