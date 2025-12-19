@@ -176,7 +176,10 @@
 }
 
 .tmenu-option-text-container {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
 }
 
 .tmenu-option .flex.flex-col {
