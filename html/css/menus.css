@@ -89,6 +89,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     align-content: flex-start;
+    align-items: start;
     flex: 1;
     min-height: 0;
     max-height: 60vh;
@@ -98,6 +99,7 @@
 .tmenu-option {
     width: 100%;
     height: fit-content;
+    min-height: fit-content;
     outline: 0;
     border-radius: 7px;
     background-color: #181818;
@@ -107,7 +109,7 @@
     padding: 1.8vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.7vh;
     text-align: left;
     position: relative;
