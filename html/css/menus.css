@@ -87,14 +87,17 @@
     gap: 5px;
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     align-content: flex-start;
     flex: 1;
     min-height: 0;
     max-height: 60vh;
+    padding: 0.5vh;
 }
 
 .tmenu-option {
     width: 100%;
+    height: fit-content;
     outline: 0;
     border-radius: 7px;
     background-color: #181818;
