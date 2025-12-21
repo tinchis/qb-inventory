@@ -421,19 +421,19 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .item-info-title {
-    font-size: 1.8vh;
+    font-size: 1.5vh;
     margin-bottom: 0.5vh;
     font-family: "IBM Plex Mono", monospace;
     color: white;
     border-bottom: 1px solid #3E8982;
     padding-bottom: 0.5vh;
     text-transform: uppercase;
-    letter-spacing: 0.1vh;
+    letter-spacing: -0.025em;
 }
 
 .item-info-description {
     color: #90C9C4;
-    font-size: 1.3vh;
+    font-size: 1.1vh;
     margin-top: 0.5vh;
     line-height: 1.4;
 }
@@ -621,16 +621,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .itembox-title {
     font-family: "IBM Plex Mono", monospace;
-    letter-spacing: 0.1vh;
+    letter-spacing: -0.025em;
     font-weight: 600;
-    font-size: 1.3vh;
+    font-size: 1.1vh;
     color: white;
     text-transform: uppercase;
 }
 
 .itembox-desc {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 1.1vh;
+    font-size: 0.95vh;
     color: #90C9C4;
 }
 
