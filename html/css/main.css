@@ -402,13 +402,16 @@ input[type="number"]::-webkit-outer-spin-button {
 .ply-iteminfo-container {
     display: none;
     z-index: 9999999;
-    padding: 1vh;
+    padding: 1.2vh 1.5vh;
     position: absolute;
     max-width: 47vh;
     text-align: left;
-    background-color: rgb(0, 0, 0);
-    box-shadow: 0 0 .2vw rgb(0, 0, 0);
-    border-radius: .2vw;
+    background-color: rgba(9, 9, 9, 0.75);
+    opacity: 0.95;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #2D2D2D;
+    border-radius: 10px;
     color: white;
     font-family: "IBM Plex Mono", monospace;
 }
@@ -421,7 +424,16 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 2.5vh;
     margin-bottom: 0.5vh;
     font-family: "IBM Plex Mono", monospace;
-    border-bottom: solid .1vh white;
+    color: white;
+    border-bottom: 1px solid #3E8982;
+    padding-bottom: 0.5vh;
+}
+
+.item-info-description {
+    color: #90C9C4;
+    font-size: 1.8vh;
+    margin-top: 0.5vh;
+    line-height: 1.4;
 }
 
 .weapon-attachments-container {
@@ -584,19 +596,17 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: row;
     align-items: center;
     padding: 1vh;
-    border-radius: .2vw;
+    border-radius: 10px;
     gap: 1vh;
+    background-color: rgba(9, 9, 9, 0.75);
+    opacity: 0.95;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #2D2D2D;
 }
 
 .itembox-action::after {
-    position: absolute;
-    content: "";
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(44deg, rgba(5, 94, 67, 0.932), rgba(5, 51, 94, 0.706));
-    /* filter: blur(.25vh); */
-    border: 1px solid white;
-    border-radius: .5vh;
+    display: none;
 }
 
 .itembox-col {
@@ -609,10 +619,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .itembox-title {
     font-family: "IBM Plex Mono", monospace;
-    letter-spacing: 2px;
-    font-weight: 100;
+    letter-spacing: 0.1vh;
+    font-weight: 600;
     font-size: 1.7vh;
-    font-weight: bold;
+    color: white;
+}
+
+.itembox-desc {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.4vh;
+    color: #90C9C4;
 }
 
 .itembox-action img {
