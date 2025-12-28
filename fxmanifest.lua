@@ -36,6 +36,7 @@ files {
     'html/images/*.jpg',
     'html/ammo_images/*.png',
     'html/attachment_images/*.png',
+    'html/imgs/*.svg',
     'html/*.ttf',
     'emotes/anims.json'
 }
