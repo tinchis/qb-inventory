@@ -1865,6 +1865,7 @@ var requiredItemOpen = false;
             </div>
         `)
 
+        $itembox.hide();
         $(".itemboxes-container").prepend($itembox);
         $itembox.fadeIn(250);
         setTimeout(function () {
