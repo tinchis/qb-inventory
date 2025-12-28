@@ -602,8 +602,6 @@ input[type="number"]::-webkit-outer-spin-button {
     gap: 1vh;
     background-color: rgba(9, 9, 9, 0.75);
     opacity: 0.95;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid #2D2D2D;
 }
 
