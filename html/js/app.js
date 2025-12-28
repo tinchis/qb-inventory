@@ -1537,8 +1537,8 @@ var requiredItemOpen = false;
             requiredItemOpen = false;
         }
 
-        $("#qbcore-inventory").fadeIn(300);
-        $("#game-view").fadeIn(300);
+        $("#qbcore-inventory").show();
+        $("#game-view").show();
         if (data.other != null && data.other != "") {
             $(".other-inventory").attr("data-inventory", data.other.name);
         } else {
@@ -1697,8 +1697,8 @@ var requiredItemOpen = false;
         $(".item-slot").css("border", ".1vh solid rgba(255, 255, 255, 0.1)");
         $(".ply-hotbar-inventory").css("display", "block");
         $(".ply-iteminfo-container").css("display", "none");
-        $("#qbcore-inventory").fadeOut(300);
-        $("#game-view").fadeOut(300);
+        $("#qbcore-inventory").hide();
+        $("#game-view").hide();
         $(".combine-option-container").hide();
         $("#other-inv-progressbar").progressbar({ value: 0 });
         $("#other-inv-weight-value").html("");

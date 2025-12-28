@@ -40,7 +40,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .inv-container {
-    transition: .2s;
     position: absolute;
     bottom: 4vh;
     padding: .5vh 0;
@@ -52,22 +51,6 @@ input[type="number"]::-webkit-outer-spin-button {
     max-height: 85vh;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-#qbcore-inventory:not([style*="display: none"]) .inv-container {
-    animation: slideInFromRight 0.4s ease-out;
-}
-
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
 }
 
 .inv-container::after {
@@ -93,8 +76,6 @@ input[type="number"]::-webkit-outer-spin-button {
     width: auto;
     height: auto;
     max-height: 59vh;
-    transition: .2s;
-    animation: slideInFromRight 0.5s ease-out 0.1s both;
 }
 
 #inv-tab {
