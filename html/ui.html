@@ -180,11 +180,11 @@
                     </svg></button>
                 <!-- </div> -->
             </div>
-            <div class="flex w-full h-[80px] rounded-lg overflow-hidden"
-                style="background-color: #111111; border: #2D2D2D solid 1px;">
-                <button
-                    class="py-3 tab-menu-btn tab-selected flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80 rounded-l-lg"
-                    style="background-color: #1C1C1C;" id="tab-inv-btn" tab="inv">
+            <div
+                style="display: flex; width: 100%; height: 80px; border-radius: 0.5rem; overflow: hidden; background-color: #111111; border: #2D2D2D solid 1px;">
+                <button class="tab-menu-btn tab-selected"
+                    style="padding: 0.75rem 1vh; flex: 1; color: #fff; cursor: pointer; transition: all 100ms; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5vh; border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem; background-color: #1C1C1C;"
+                    id="tab-inv-btn" tab="inv">
                     <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M0.5 9.5C0.5 8.30653 0.974105 7.16193 1.81802 6.31802C2.66193 5.47411 3.80652 5 5 5H14C15.1935 5 16.3381 5.47411 17.182 6.31802C18.0259 7.16193 18.5 8.30653 18.5 9.5V20.75C18.5 21.3467 18.2629 21.919 17.841 22.341C17.419 22.7629 16.8467 23 16.25 23H2.75C2.15326 23 1.58097 22.7629 1.15901 22.341C0.737053 21.919 0.5 21.3467 0.5 20.75V9.5Z"
@@ -197,17 +197,17 @@
                             stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M5 18.5H14" stroke="#C9C9C9" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
-                        style="color: #626262;">
+                    <p
+                        style="font-size: 0.75rem; line-height: 1rem; text-transform: uppercase; letter-spacing: -0.025em; font-weight: 500; font-family: 'IBM Plex Mono', monospace; margin: 0; color: #626262;">
                         Inventario
                     </p>
                 </button>
 
-                <div class="h-full w-px" style="background-color: #242424;"></div>
+                <div style="height: 100%; width: 1px; background-color: #242424;"></div>
 
-                <button
-                    class="py-3 tab-menu-btn flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80"
-                    style="background-color: #111111;" id="tab-emotes-btn" tab="emotes">
+                <button class="tab-menu-btn"
+                    style="padding: 0.75rem 1vh; flex: 1; color: #fff; cursor: pointer; transition: all 100ms; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5vh; background-color: #111111;"
+                    id="tab-emotes-btn" tab="emotes">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.75 17.875V3.25L21.25 1V15.625" stroke="#C9C9C9" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" />
@@ -218,47 +218,47 @@
                             d="M17.875 19C19.739 19 21.25 17.489 21.25 15.625C21.25 13.761 19.739 12.25 17.875 12.25C16.011 12.25 14.5 13.761 14.5 15.625C14.5 17.489 16.011 19 17.875 19Z"
                             stroke="#C9C9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
-                        style="color: #626262;">
+                    <p
+                        style="font-size: 0.75rem; line-height: 1rem; text-transform: uppercase; letter-spacing: -0.025em; font-weight: 500; font-family: 'IBM Plex Mono', monospace; margin: 0; color: #626262;">
                         Animaciones
                     </p>
                 </button>
 
-                <div class="h-full w-px" style="background-color: #242424;"></div>
-                <button
-                    class="py-3 tab-menu-btn flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80 rounded-r-lg"
-                    style="background-color: #111111;" id="tab-clothes-btn" tab="clothes">
+                <div style="height: 100%; width: 1px; background-color: #242424;"></div>
+                <button class="tab-menu-btn"
+                    style="padding: 0.75rem 1vh; flex: 1; color: #fff; cursor: pointer; transition: all 100ms; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5vh; border-top-right-radius: 0.5rem; border-bottom-right-radius: 0.5rem; background-color: #111111;"
+                    id="tab-clothes-btn" tab="clothes">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M21.3938 2.6425L16.4663 1C16.4663 2.19347 15.9922 3.33807 15.1483 4.18198C14.3044 5.02589 13.1598 5.5 11.9663 5.5C10.7729 5.5 9.62826 5.02589 8.78434 4.18198C7.94043 3.33807 7.46633 2.19347 7.46633 1L2.53882 2.6425C2.02963 2.81214 1.59785 3.15822 1.32141 3.61826C1.04497 4.0783 0.942086 4.62201 1.03132 5.15125L1.68382 9.055C1.72666 9.31928 1.86234 9.55961 2.06648 9.73283C2.27063 9.90604 2.52985 10.0008 2.79757 10H5.21632V21.25C5.21632 22.4875 6.22882 23.5 7.46633 23.5H16.4663C17.0631 23.5 17.6354 23.2629 18.0573 22.841C18.4793 22.419 18.7163 21.8467 18.7163 21.25V10H21.1351C21.4028 10.0008 21.662 9.90604 21.8662 9.73283C22.0703 9.55961 22.206 9.31928 22.2488 9.055L22.9013 5.15125C22.9906 4.62201 22.8877 4.0783 22.6112 3.61826C22.3348 3.15822 21.903 2.81214 21.3938 2.6425Z"
                             stroke="#C9C9C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
-                        style="color: #626262;">
+                    <p
+                        style="font-size: 0.75rem; line-height: 1rem; text-transform: uppercase; letter-spacing: -0.025em; font-weight: 500; font-family: 'IBM Plex Mono', monospace; margin: 0; color: #626262;">
                         Vestimenta
                     </p>
                 </button>
 
-                <div class="h-full w-px" style="background-color: #242424;"></div>
+                <div style="height: 100%; width: 1px; background-color: #242424;"></div>
 
-                <button
-                    class="py-3 tab-menu-btn flex-1 text-white cursor-pointer transition-all duration-[100ms] flex flex-col items-center justify-center gap-[0.5vh] p-[1vh] hover:opacity-90 active:opacity-80"
-                    style="background-color: #111111;" id="tab-menus-btn" tab="menus">
+                <button class="tab-menu-btn"
+                    style="padding: 0.75rem 1vh; flex: 1; color: #fff; cursor: pointer; transition: all 100ms; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5vh; background-color: #111111;"
+                    id="tab-menus-btn" tab="menus">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 12H21M3 6H21M3 18H21" stroke="#C9C9C9" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    <p class="text-xs uppercase tracking-tight font-medium font-['IBM_Plex_Mono',monospace] m-0"
-                        style="color: #626262;">
+                    <p
+                        style="font-size: 0.75rem; line-height: 1rem; text-transform: uppercase; letter-spacing: -0.025em; font-weight: 500; font-family: 'IBM Plex Mono', monospace; margin: 0; color: #626262;">
                         Menú
                     </p>
                 </button>
             </div>
 
-            <div id="drop-item-message" class="flex items-center gap-1 px-3 w-full py-2 rounded-md"
-                style="background-color: #0D0D0D; border: 1px solid #2D2D2D;">
-                <svg class="block w-4 h-4" width="15" height="14" viewBox="0 0 15 14" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+            <div id="drop-item-message"
+                style="display: flex; align-items: center; gap: 0.25rem; padding: 0.5rem 0.75rem; width: 100%; border-radius: 0.375rem; background-color: #0D0D0D; border: 1px solid #2D2D2D;">
+                <svg style="display: block; width: 1rem; height: 1rem;" width="15" height="14" viewBox="0 0 15 14"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M13.3709 14C14.2706 14 15 13.2494 15 12.3236C15 12.0717 14.9449 11.8235 14.8392 11.5972L14.7908 11.5019L8.99554 0.900243C8.69156 0.344213 8.11995 0 7.5 0C6.91877 0 6.38002 0.302565 6.06445 0.798574L6.0045 0.900243L0.209163 11.5019C0.0720419 11.7527 1.39535e-05 12.0358 0 12.3236C0 13.2494 0.729391 14 1.62904 14H13.3709ZM7.5 8.79487C7.11467 8.79487 6.80233 8.47345 6.80233 8.07692V4.84615C6.80233 4.44964 7.11467 4.12821 7.5 4.12821C7.88533 4.12821 8.19767 4.44964 8.19767 4.84615V8.07692C8.19767 8.47345 7.88533 8.79487 7.5 8.79487ZM7.5 11.3147C7.11467 11.3147 6.80233 10.9933 6.80233 10.5968V10.5897C6.80233 10.1932 7.11467 9.87179 7.5 9.87179C7.88533 9.87179 8.19767 10.1932 8.19767 10.5897V10.5968C8.19767 10.9933 7.88533 11.3147 7.5 11.3147Z"
                         fill="#0F7067" />
